@@ -27,8 +27,7 @@ function Navbar() {
         backgroundColor: "rgba(177, 120, 84,0.9)",
         borderRadius: "20px",
         height: "100%",
-        fontFamily: "Inter",
-        textAlign: "center",
+        textAlign: "left",
       }}
     >
       {/* <Button
@@ -70,15 +69,17 @@ function Navbar() {
         </Menu.Item>
         <Menu.Item className="menuItem">
           <div className="content">
-            <LineChartOutlined className="icon" />
-            <span>Analytics</span>{" "}
+            <NavLink>
+              <LineChartOutlined className="icon" />
+              <span>Analytics</span>{" "}
+            </NavLink>
           </div>
         </Menu.Item>
         <Menu.Item className="menuItem">
           <div className="content">
             <NavLink to="/innote">
               <EditOutlined className="icon" />
-              <span>In Notes</span>{" "}
+              <span>In Note</span>{" "}
             </NavLink>
           </div>
         </Menu.Item>
@@ -86,7 +87,7 @@ function Navbar() {
           <div className="content">
             <NavLink to="/outnote">
               <PrinterOutlined className="icon" />
-              <span>Out Notes</span>
+              <span>Out Note</span>
             </NavLink>
           </div>
         </Menu.Item>

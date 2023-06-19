@@ -1,4 +1,5 @@
 import React from "react";
+import NoteInForm from "../../Components/Forms/NoteInForm";
 // import { useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import Product from "../../Components/Product/product";
@@ -16,8 +17,16 @@ export default function Innote() {
   //   console.log(arrProduct);
 
   return (
-    <div className="container">
-      <p style={{ backgroundColor: "Blue" }}>ấđas</p>
+    <div
+      className="container"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100%",
+      }}
+    >
+      <NoteInForm />
     </div>
   );
 }

@@ -11,10 +11,14 @@ const FooterHome = () => {
         justifyContent: "center", // Căn giữa theo chiều ngang
         alignItems: "center", // Căn giữa theo chiều dọc
         borderRadius: "20px",
-        height: "0.5vh",
+        height: "3vh",
+        padding: "0",
+        marginTop: "10px",
+        backgroundColor: "rgba(255,225,255,0.5)",
       }}
     >
-      Cashu Company
+      © 2023 Cashu Company. All rights reserved. Website designed by Tan Nguyen
+      & Thuy Nguyen.
     </Footer>
   );
 };

@@ -1,5 +1,9 @@
 // @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lobster&family=Rubik:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lobster&family=Rubik:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+html {
+  font-family: "Poppins", sans-serif !important;
+}
 .logo-container {
   display: flex;
   justify-content: center;
@@ -16,7 +20,7 @@
   height: auto !important;
   width: auto !important;
   gap: 30px;
-  border: 1px solid white;
+  // border: 1px solid white;
   margin-bottom: 30px !important;
   margin-left: 20px !important;
   margin-right: 20px !important;
@@ -24,8 +28,9 @@
 }
 
 .menuItem .content {
+  font-family: "Poppins", sans-serif;
   text-align: left;
-  padding: 10px;
+  padding: 10px 0px;
 }
 
 .icon {
@@ -37,14 +42,18 @@
 // :where(.css-dev-only-do-not-override-12jzuas).ant-menu-light
 //   > .ant-menu
 .ant-menu-item-selected {
-  background-color: rgba($color: white, $alpha: 0.5) !important;
+  font-family: "Poppins", sans-serif;
+
+  background-color: rgba(220, 200, 200, 0.9) !important;
   // color: white;
+  box-shadow: 0px 0px 5px 2px rgb(255, 255, 255);
 }
 
 .ant-menu .ant-menu-item-selected {
-  font-family: "Inter", sans-serif;
+  // font-family: "Inter", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: rgb(63, 59, 56) !important;
-  font-weight: 1000;
+  font-weight: 800;
 }
 
 // Dashboard
@@ -64,4 +73,13 @@
 }
 .columnDashboard:first-child .ant-card-body {
   padding: 10px;
+}
+
+//In notes
+
+#inCard {
+  width: 30% !important;
+  background-color: rgba(220, 200, 200, 0.9);
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px 2px rgb(173, 159, 168);
 }

@@ -21,12 +21,10 @@ const HeaderDashboard = () => {
       <div
         style={{
           flex: 1,
-          textAlign: "center",
           display: "flex",
-          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        {" "}
         <SearchBar />
       </div>
       <div style={{ flex: 1, textAlign: "right" }}>
