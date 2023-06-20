@@ -1,4 +1,5 @@
 import React from "react";
+import NoteOutForm from "../../Components/Forms/NoteOutForm";
 // import { useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import Product from "../../Components/Product/product";
@@ -17,15 +18,7 @@ export default function Outnote() {
 
   return (
     <div className="container">
-      <p
-        style={{
-          backgroundColor: " rgba(220, 200, 200, 0.9)",
-          height: "80vh",
-          textAlign: "center",
-        }}
-      >
-        Outnotes
-      </p>
+      <NoteOutForm />
     </div>
   );
 }
