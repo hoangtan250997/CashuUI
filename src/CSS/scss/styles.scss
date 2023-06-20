@@ -94,7 +94,17 @@ legend {
   height: 1.6rem;
   padding-top: 20px;
   padding-bottom: 10px;
+  background-color: rgba(136, 130, 130, 0.2);
 }
 .inNotesNode label {
   margin-top: 3px;
+}
+
+.filled label {
+  margin-top: 3px;
+}
+
+// Đổi màu input
+.filled {
+  background-color: rgb(220, 200, 200) !important;
 }

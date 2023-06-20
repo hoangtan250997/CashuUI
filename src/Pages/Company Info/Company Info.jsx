@@ -15,17 +15,5 @@ export default function CompanyInfo() {
   //   }, []);
   //   console.log(arrProduct);
 
-  return (
-    <div className="container">
-      <p
-        style={{
-          backgroundColor: " rgba(220, 200, 200, 0.9)",
-          height: "80vh",
-          textAlign: "center",
-        }}
-      >
-        Company Info{" "}
-      </p>
-    </div>
-  );
+  return <div className="container"></div>;
 }
