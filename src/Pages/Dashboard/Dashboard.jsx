@@ -135,19 +135,27 @@ export default function DashBoard() {
           </Card>
         </Col>
         <Col span={9} className="columnDashboard" id="columnDashboard2">
-          <Card title="Raw Cashew Nuts" bordered={false}>
+          <Card
+            title="Raw Cashew Nuts"
+            bordered={false}
+            style={{ backgroundColor: "rgba(220, 200, 200, 0.9)" }}
+          >
             <BarChart data={data} />
           </Card>{" "}
         </Col>
         <Col span={9} className="columnDashboard" id="columnDashboard3">
-          <Card title="Finished Products" bordered={false}>
+          <Card
+            title="Finished Products"
+            bordered={false}
+            style={{ backgroundColor: "rgba(220, 200, 200, 0.9)" }}
+          >
             <BarChart data={data} />
           </Card>{" "}
         </Col>
       </Row>
       <Row className="rowDashboard">
         <Col span={24}>
-          <Card>
+          <Card style={{ backgroundColor: "rgba(220, 200, 200, 0.5)" }}>
             <IncomingTable data={incomingData} />
           </Card>
         </Col>

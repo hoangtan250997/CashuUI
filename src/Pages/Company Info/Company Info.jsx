@@ -5,7 +5,7 @@ import React from "react";
 // import { getProductApi } from "../../redux/reducers/productReducer";
 // import Carousel_Home from "./Carousel_Home";
 
-export default function Outnote() {
+export default function CompanyInfo() {
   //Lấy dữ liệu từ redux
   //   const { arrProduct } = useSelector((state) => state.productReducer);
   //   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ export default function Outnote() {
           textAlign: "center",
         }}
       >
-        Outnotes
+        Company Info{" "}
       </p>
     </div>
   );

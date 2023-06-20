@@ -10,7 +10,9 @@ import {
   BulbOutlined,
 } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
-import logo from "../../logo.png";
+import logo from "../../cashu.png";
+import cashew from "../../cashew3.png";
+
 import "../../CSS/scss/styles.scss";
 import "../../CSS/scss/styles.css";
 
@@ -45,7 +47,7 @@ function Navbar() {
           borderColor: "white",
           opacity: "0.5",
           marginTop: "0",
-          marginBottom: "50",
+          marginBottom: "100",
         }}
       />
       <Menu
@@ -53,6 +55,7 @@ function Navbar() {
           backgroundColor: "rgba(0, 0, 0, 0)",
           fontWeight: "500",
           color: "white",
+          marginTop: "100",
         }}
         // defaultSelectedKeys={["1"]}
         // defaultOpenKeys={["sub1"]}
@@ -69,7 +72,7 @@ function Navbar() {
         </Menu.Item>
         <Menu.Item className="menuItem">
           <div className="content">
-            <NavLink>
+            <NavLink to="/analytics">
               <LineChartOutlined className="icon" />
               <span>Analytics</span>{" "}
             </NavLink>
@@ -93,8 +96,10 @@ function Navbar() {
         </Menu.Item>
         <Menu.Item className="menuItem">
           <div className="content">
-            <SolutionOutlined className="icon" />
-            <span>Company News</span>
+            <NavLink to="/companyInfo">
+              <SolutionOutlined className="icon" />
+              <span>Company Info</span>
+            </NavLink>
           </div>
         </Menu.Item>
         <Divider
@@ -102,6 +107,7 @@ function Navbar() {
             borderColor: "white",
             opacity: "0.5",
             width: "1px",
+            marginTop: "30",
           }}
         />
         <Menu.Item className="menuItem">
@@ -110,7 +116,7 @@ function Navbar() {
             <span>Log out</span>
           </div>
         </Menu.Item>
-        <Menu.Item className="menuItem">
+        {/* <Menu.Item className="menuItem">
           <div className="content">
             <Switch
               Switch
@@ -120,8 +126,16 @@ function Navbar() {
             />
             <span>Dark Mode</span>
           </div>
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
+      <div id="gif" className="logo-container">
+        <img
+          src={cashew}
+          alt=""
+          className="logo-image"
+          style={{ padding: "0" }}
+        />
+      </div>
     </div>
   );
 }
