@@ -1,6 +1,10 @@
 // @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
 // @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lobster&family=Rubik:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+:root {
+  --main-color: rgb(0, 0, 0);
+}
+
 html {
   font-family: "Poppins", sans-serif !important;
 }
@@ -79,8 +83,6 @@ legend {
   font-size: larger;
 }
 
-
-
 #inCard {
   // width: 30% !important;
   background-color: rgba(220, 200, 200, 0.9);
@@ -88,3 +90,11 @@ legend {
   box-shadow: 0px 0px 5px 2px rgb(173, 159, 168);
 }
 
+.inNotesNode input {
+  height: 1.6rem;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+.inNotesNode label {
+  margin-top: 3px;
+}

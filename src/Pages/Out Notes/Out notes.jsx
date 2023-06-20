@@ -17,7 +17,13 @@ export default function Outnote() {
   //   console.log(arrProduct);
 
   return (
-    <div className="container">
+    <div
+      className="container"
+      style={{
+        backgroundColor: " rgba(220, 200, 200, 0.9)",
+        textAlign: "center",
+      }}
+    >
       <NoteOutForm />
     </div>
   );

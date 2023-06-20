@@ -19,12 +19,15 @@ import AddIcon from "@mui/icons-material/Add";
 import Icon from "@mui/material/Icon";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-
+import InputAdornment from "@mui/material/InputAdornment";
+import Input from "@mui/material/Input";
 import { makeStyles } from "@mui/styles/";
 import { v4 as uuidv4 } from "uuid";
+import OutlinedInput from "@mui/material/OutlinedInput";
 
 import "../../CSS/scss/innotes.css";
 import "../../CSS/scss/styles.scss";
+import { auto } from "@popperjs/core";
 
 // import Icon from "@ant-design/icons/lib/components/AntdIcon";
 
@@ -69,15 +72,29 @@ import "../../CSS/scss/styles.scss";
 //       console.log(values);
 //     },
 //   });
+
 const useStyles = makeStyles({
   root: {
-    background: "#dcc8c8e6",
+    background: "rgb(220,200,200)",
+    // background:
     boxShadow: "0px 0px 5px 2px rgb(173, 159, 168)",
     padding: "0 30px",
+    borderRadius: "20px",
   },
 });
 
 function NoteInForm() {
+  const [age, setAge] = React.useState("");
+  const [area, setArea] = React.useState("");
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
+  const changeArea = (event) => {
+    setArea(event.target.value);
+  };
+
   const classes = useStyles();
   const [inputFields, setInputFields] = useState([
     { id: uuidv4(), productCode: "", lastName: "" },
@@ -114,10 +131,15 @@ function NoteInForm() {
     );
     setInputFields(values);
   };
+
   return (
-    <Container className={classes.root}>
+    <Container className={classes.root} style={{ height: "auto" }}>
       <Typography
-        sx={{ fontSize: "h2.fontSize", fontWeight: "bold", align: "center" }}
+        sx={{
+          fontSize: "h3.fontSize",
+          fontWeight: "bold",
+          textAlign: "center",
+        }}
       >
         IN NOTE FORM
       </Typography>
@@ -125,8 +147,9 @@ function NoteInForm() {
         <Box
           sx={{
             display: "grid",
-            gridTemplateRows: "repeat(1, 1fr)",
-            rowGap: 1,
+            gridTemplateColumns: "repeat(1, 1fr)",
+            gap: 1,
+            marginBottom: 1,
           }}
         >
           <InputLabel id="supplier-select-label">Supplier Code</InputLabel>
@@ -143,13 +166,11 @@ function NoteInForm() {
             <MenuItem value={20}>SDE</MenuItem>
             <MenuItem value={30}>TAN</MenuItem>
           </Select>
-
           <TextField
-            fullWidth
-            id="fullWidth"
+            id="note"
+            label="Note (Optional)"
             name="note"
-            label="Note"
-            variant="filled"
+            variant="outlined"
             value={inputFields[0].note}
             onChange={(event) => handleChangeInput(inputFields[0].id, event)}
           />
@@ -159,43 +180,88 @@ function NoteInForm() {
             display: "grid",
             gridTemplateRows: "repeat(2, 1fr)",
             rowGap: 1,
-            columnGap: 3,
+            // columnGap: 3,
           }}
         >
           {inputFields.map((inputField) => (
             <div key={inputField.id}>
-              <TextField
-                name="productCode"
-                label="Product Code"
-                variant="filled"
-                value={inputField.productCode}
-                onChange={(event) => handleChangeInput(inputField.id, event)}
-              />
+              <FormControl sx={{ marginRight: 1, minWidth: 200 }}>
+                <InputLabel style={{ margin: "0" }}>Product Code</InputLabel>
+                <Select
+                  labelId="productCode"
+                  id="productCode"
+                  value={age}
+                  label="Product Code"
+                  onChange={handleChange}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={1}>W180</MenuItem>
+                  <MenuItem value={2}>W210</MenuItem>
+                  <MenuItem value={3}>W240</MenuItem>
+                </Select>
+              </FormControl>
 
               <TextField
+                className="inNotesNode"
+                style={{ marginRight: "10px" }}
                 name="amount"
-                label="Amount"
-                variant="filled"
+                label="Amount (kg)"
                 value={inputField.amount}
                 onChange={(event) => handleChangeInput(inputField.id, event)}
               />
-
+              {/* <InputLabel htmlFor="outlined-adornment-amount">
+                Amount
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-amount"
+                startAdornment={
+                  <InputAdornment position="start">$</InputAdornment>
+                }
+                label="Amount"
+              /> */}
               <TextField
+                className="inNotesNode"
+                style={{ marginRight: "10px" }}
                 name="cost"
                 label="Cost"
-                variant="filled"
                 value={inputField.cost}
                 onChange={(event) => handleChangeInput(inputField.id, event)}
-              />
+              >
+                <Input
+                  id="standard-adornment-amount"
+                  startAdornment={
+                    <InputAdornment position="start">$</InputAdornment>
+                  }
+                />
+              </TextField>
 
-              <TextField
+              {/* <TextField
+                className="inNotesNode"
+                style={{ marginRight: "10px" }}
                 name="areaCode"
                 label="Area Code"
-                variant="filled"
                 value={inputField.areaCode}
                 onChange={(event) => handleChangeInput(inputField.id, event)}
-              />
-
+              /> */}
+              <FormControl sx={{ marginRight: 1, minWidth: 200 }}>
+                <InputLabel style={{ margin: "0" }}>Area</InputLabel>
+                <Select
+                  labelId="areaCode"
+                  id="areaCode"
+                  value={area}
+                  label="Area Code"
+                  onChange={changeArea}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={10}>W180</MenuItem>
+                  <MenuItem value={20}>W210</MenuItem>
+                  <MenuItem value={30}>W240</MenuItem>
+                </Select>
+              </FormControl>
               <IconButton
                 disabled={inputFields.length === 1}
                 onClick={() => handleRemoveFields(inputField.id)}
@@ -209,19 +275,21 @@ function NoteInForm() {
             </div>
           ))}
         </Box>
-        <Button
-          sx={{
-            background: "black",
-            alignContent: "center",
-          }}
-          className={classes.button}
-          variant="contained"
-          color="primary"
-          type="submit"
-          onClick={handleSubmit}
-        >
-          Submit
-        </Button>
+        <div style={{ textAlign: "center", margin: "20px" }}>
+          <Button
+            sx={{
+              background: "black",
+              alignContent: "center",
+            }}
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            type="submit"
+            onClick={handleSubmit}
+          >
+            Submit
+          </Button>
+        </div>
       </form>
     </Container>
   );
