@@ -1,17 +1,18 @@
 import React from "react";
-
+import Multiple from "../../Components/Forms/MutipleForm";
 export default function Analytics() {
   return (
-    <div className="container">
-      <p
-        style={{
-          backgroundColor: " rgba(220, 200, 200, 0.9)",
-          height: "80vh",
-          textAlign: "center",
-        }}
-      >
-        Analytics
-      </p>
+    <div
+      className="container"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "gray",
+      }}
+    >
+      {" "}
+      <Multiple />
     </div>
   );
 }

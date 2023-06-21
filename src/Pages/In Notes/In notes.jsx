@@ -18,11 +18,11 @@ export default function Innote() {
 
   return (
     <div
-      // className="container"
+      className="container"
       style={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
       }}
     >
       <NoteInForm />

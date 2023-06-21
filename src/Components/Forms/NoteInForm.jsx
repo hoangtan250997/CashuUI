@@ -83,16 +83,77 @@ const useStyles = makeStyles({
 });
 
 function NoteInForm() {
-  // Đổi màu nền của Input
-  const [inputValue, setInputValue] = useState("");
-  const [isFilled, setIsFilled] = useState(false);
+  // Điều chỉnh thư viên Material UI
+  // Khởi tạo giá trị cho form
+  const classes = useStyles();
+  const [inputFields, setinputFields] = useState({
+    supplierCode: "",
+    note: "",
+    inputField: [
+      {
+        detailId: uuidv4(),
+        productCode: "",
+        amount: "",
+        cost: "",
+        area: "",
+      },
+    ],
+  });
 
-  const handleInputChange = (e) => {
-    console.log("HANDLE INPUT CHANGE");
-    const value = e.target.value;
-    setInputValue(value);
-    setIsFilled(value !== "");
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    // alert(value);
+
+    setinputFields((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
+
+  const handleSubmitConsole = (event) => {
+    event.preventDefault();
+    alert(
+      `SupplierCode: ${inputFields.supplierCode}, Note: ${inputFields.note},Production Code: ${inputFields.inputField[0].productCode}`
+    );
+
+    console.log("InputFields", inputFields);
+  };
+
+  // Cho phép ghi giá trị vào ô và lấy giá trị
+  // const handleChangeInput = (event) => {
+  //   console.log("HERE");
+  //   const { name, value } = event.target;
+  //   console.log("name", name);
+  //   console.log("value", value);
+
+  //   setInputFields((prevFormData) => ({ ...prevFormData, [name]: value }));
+  // };
+
+  // Tạo ra object cho form
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log("InputFields", inputFields);
+  };
+  //----------------------------------------------------
+  // const newInputFields = inputFields.map((i) => {
+  // console.log("ID2 là: ", i.id);
+  //   i[event.target.name] = event.target.value;
+  //   console.log("Giá trị ", event.target.name, event.target.value);
+
+  //   return i;
+  // });
+
+  // setInputFields(newInputFields);
+
+  // Đổi màu nền của Input
+  // const [inputValue, setInputValue] = useState("");
+  // const [isFilled, setIsFilled] = useState(false);
+
+  // const handleInputChange = (e) => {
+  //   console.log("HANDLE INPUT CHANGE");
+  //   const value = e.target.value;
+  //   setInputValue(value);
+  //   setIsFilled(value !== "");
+  // };
+  //----------------------------------------------------
 
   //Option của thẻ Product code & Area
   const [productCode, setproductCode] = React.useState("");
@@ -106,69 +167,25 @@ function NoteInForm() {
     setArea(event.target.value);
   };
 
-  // Điều chỉnh thư viên Material UI
-  // Khởi tạo giá trị cho form
-  const classes = useStyles();
-  const [inputFields, setInputFields] = useState([
-    {
-      id: uuidv4(),
-      supplierCode: "",
-      note: "",
-      incomingDetails: [
-        {
-          detailId: uuidv4(),
-          productCode: "",
-          amount: "",
-          cost: "",
-          area: "",
-        },
-      ],
-    },
-  ]);
-
-  // Chưa biết
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("InputFields", inputFields);
-  };
-
-  // Cho phép ghi giá trị vào ô và lấy giá trị
-  const handleChangeInput = (id, event) => {
-    console.log("ID1 là: ", id);
-    const newInputFields = inputFields.map((i) => {
-      console.log("ID2 là: ", i.id);
-
-      // if (id === i.id) {
-      i[event.target.name] = event.target.value;
-      // }
-      console.log("Giá trị ", event.target.name, event.target.value);
-
-      return i;
-    });
-
-    setInputFields(newInputFields);
-  };
-
   // Dấu +
 
-  const handleAddFields = () => {
-    setInputFields([
-      ...inputFields,
-      { id: uuidv4(), amount: "", cost: "", areaCode: "" },
-    ]);
-  };
+  // const handleAddFields = () => {
+  //   setinputFields([
+  //     ...inputFields,
+  //     { id: uuidv4(), amount: "", cost: "", areaCode: "" },
+  //   ]);
+  // };
   // Dấu -
 
-  const handleRemoveFields = (id) => {
-    const values = [...inputFields];
-    values.splice(
-      values.findIndex((value) => value.id === id),
-      1
-    );
-    setInputFields(values);
-  };
-  //
+  // const handleRemoveFields = (id) => {
+  //   const values = [...inputFields];
+  //   values.splice(
+  //     values.findIndex((value) => value.id === id),
+  //     1
+  //   );
+  //   setinputFields(values);
+  // };
+
   return (
     <Container className={classes.root} style={{ height: "auto" }}>
       <Typography
@@ -198,8 +215,8 @@ function NoteInForm() {
             labelId="supplier-select-label"
             name="supplierCode"
             label="Supplier Code"
-            value={inputFields[0].supplierCode}
-            onChange={(event) => handleChangeInput(inputFields[0].id, event)}
+            value={inputFields.supplierCode}
+            onChange={handleChange}
           >
             <MenuItem value={10}>SHRI</MenuItem>
             <MenuItem value={20}>SDE</MenuItem>
@@ -214,11 +231,15 @@ function NoteInForm() {
             // label="Note (Optional)"
             name="note"
             variant="outlined"
-            value={inputFields[0].note}
-            onChange={(event) => handleChangeInput(inputFields[0].id, event)}
+            value={inputFields.note}
+            // onChange={(event) => handleChangeInput(inputFields[0].id, event)}
+            onChange={handleChange}
           />
         </Box>
+
         <br />
+        {/* ----------------------------------------------------------------- */}
+        {/* ----------------------------------------------------------------- */}
 
         <Box
           sx={{
@@ -228,96 +249,95 @@ function NoteInForm() {
             // columnGap: 3,
           }}
         >
-          {inputFields.map((inputField) => (
-            <div key={inputField.id}>
-              {/* Production Code */}
-              {/* <InputLabel id="detail-select-label" style={{ margin: "10px" }}>
-                Detail
-              </InputLabel> */}
-              <FormControl sx={{ marginRight: 1, minWidth: 250 }}>
-                <InputLabel style={{ margin: "0" }}>Product Code</InputLabel>
-                <Select
-                  labelId="productCode"
-                  id="productCode"
-                  value={productCode}
-                  label="Product Code"
-                  // onChange={handleChange}
-                  onChange={(event) => {
-                    changeProductCode(event);
-                  }}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={1}>W180</MenuItem>
-                  <MenuItem value={2}>W210</MenuItem>
-                  <MenuItem value={3}>W240</MenuItem>
-                </Select>
-              </FormControl>
-              {/* Amount */}
+          {/* {inputFields.map((field, index) => (
+            <div key={index}> */}
+          {/* Production Code */}
+          <FormControl sx={{ marginRight: 1, minWidth: 250 }}>
+            <InputLabel style={{ margin: "0" }}>Product Code</InputLabel>
+            <Select
+              labelId="productCode"
+              id="productCode"
+              name="productCode"
+              value={inputFields.inputField[0].productCode}
+              label="Product Code"
+              // onChange={handleChange}
+              // onChange={(event) => {
+              //   changeProductCode(event);
+              // }}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={1}>W180</MenuItem>
+              <MenuItem value={2}>W210</MenuItem>
+              <MenuItem value={3}>W240</MenuItem>
+            </Select>
+          </FormControl>{" "}
+          {/* Amount */}
+          {/* <TextField
+            id="amount"
+            style={{ marginRight: "10px", minWidth: "250px" }}
+            name="amount"
+            label="Amount (kg)"
+            value={inputFields[0].incomingDetails[0].amount}
+            // onChange={(event) => {
+            //   handleChangeInput(event.target.id, event);
+            // handleInputChange(event);
 
-              <TextField
-                id="amount"
-                style={{ marginRight: "10px", minWidth: "250px" }}
-                name="amount"
-                label="Amount (kg)"
-                value={inputField.amount}
-                onChange={(event) => {
-                  handleChangeInput(event.target.id, event);
-                  handleInputChange(event);
-                }}
-                className={isFilled ? "filled" : "inNotesNode"}
-              />
-              {/* Cost */}
+            // }}
+            onChange={handleChange}
 
-              <TextField
-                style={{ marginRight: "10px", minWidth: "250px" }}
-                name="cost"
-                label="Cost"
-                value={inputField.cost}
-                onChange={(event) => {
-                  handleChangeInput(inputField.id, event);
-                  handleInputChange(event);
-                }}
-                className={isFilled ? "filled" : "inNotesNode"}
-              ></TextField>
+            // className={isFilled ? "filled" : "inNotesNode"}
+          /> */}
+          {/* Cost */}
+          {/* <TextField
+            style={{ marginRight: "10px", minWidth: "250px" }}
+            name="cost"
+            label="Cost"
+            value={inputFields[0].incomingDetails[0].cost}
+            // onChange={(event) => {
+            //   handleChangeInput(inputField.id, event);
+            //   // handleInputChange(event);
+            // }}
+            onChange={handleChange}
 
-              {/* Area */}
+            // className={isFilled ? "filled" : "inNotesNode"}
+          ></TextField> */}
+          {/* Area */}
+          {/* <FormControl sx={{ marginRight: 1, minWidth: 250 }}>
+            <InputLabel style={{ margin: "0" }}>Area</InputLabel>
+            <Select
+              labelId="areaCode"
+              id="areaCode"
+              value={inputFields[0].incomingDetails[0].area}
+              label="Area Code"
+              onChange={changeArea}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>W180</MenuItem>
+              <MenuItem value={20}>W210</MenuItem>
+              <MenuItem value={30}>W240</MenuItem>
+            </Select>
+          </FormControl> */}
+          {/* Button*/}
+          {/* <IconButton
+            disabled={inputFields.length === 1}
+            // onClick={() => handleRemoveFields(inputField.id)}
+          >
+            <RemoveIcon />
+          </IconButton>
 
-              <FormControl sx={{ marginRight: 1, minWidth: 250 }}>
-                <InputLabel style={{ margin: "0" }}>Area</InputLabel>
-                <Select
-                  labelId="areaCode"
-                  id="areaCode"
-                  value={area}
-                  label="Area Code"
-                  onChange={changeArea}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>W180</MenuItem>
-                  <MenuItem value={20}>W210</MenuItem>
-                  <MenuItem value={30}>W240</MenuItem>
-                </Select>
-              </FormControl>
-
-              {/* Button*/}
-
-              <IconButton
-                disabled={inputFields.length === 1}
-                onClick={() => handleRemoveFields(inputField.id)}
-              >
-                <RemoveIcon />
-              </IconButton>
-
-              <IconButton onClick={handleAddFields}>
-                <AddIcon />
-              </IconButton>
-            </div>
-          ))}
+          <IconButton onClick={handleAddFields}>
+            <AddIcon />
+          </IconButton> */}
+          {/* </div> */}
+          {/* ))} */}
         </Box>
 
+        {/* ----------------------------------------------------------------- */}
+        {/* ----------------------------------------------------------------- */}
         <div style={{ textAlign: "center", margin: "20px" }}>
           <Button
             sx={{
@@ -328,7 +348,7 @@ function NoteInForm() {
             variant="contained"
             color="primary"
             type="submit"
-            onClick={handleSubmit}
+            onClick={handleSubmitConsole}
           >
             Submit
           </Button>

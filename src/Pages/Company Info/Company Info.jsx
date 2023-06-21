@@ -1,4 +1,6 @@
 import React from "react";
+import GitForm from "../../Components/Forms/GitForm";
+
 // import { useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import Product from "../../Components/Product/product";
@@ -15,5 +17,9 @@ export default function CompanyInfo() {
   //   }, []);
   //   console.log(arrProduct);
 
-  return <div className="container"></div>;
+  return (
+    <div className="container" style={{ backgroundColor: "white" }}>
+      <GitForm />;
+    </div>
+  );
 }
