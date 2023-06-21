@@ -1,50 +1,15 @@
-import React from "react";
-import { Row, Col, Card, Statistic } from "antd";
+import React, { useState, useEffect } from "react";
+import { Row, Col, Card, Statistic, Typography } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
-import BarChart from "../../Components/Charts/BarChar";
+
+import RawChart from "../../Components/Charts/RawChart";
+import FGChart from "../../Components/Charts/FGChart";
 import IncomingTable from "../../Components/Tables/ImcomingTable";
 // import { useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import Product from "../../Components/Product/product";
 // import { getProductApi } from "../../redux/reducers/productReducer";
 // import Carousel_Home from "./Carousel_Home";
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-  },
-];
 
 const incomingData = [
   {
@@ -72,16 +37,10 @@ const incomingData = [
     address: "London No. 2 Lake Park",
   },
 ];
-export default function DashBoard() {
-  //Lấy dữ liệu từ redux
-  //   const { arrProduct } = useSelector((state) => state.productReducer);
-  //   const dispatch = useDispatch();
-  //   useEffect(() => {
-  //     const action = getProductApi();
-  //     dispatch(action);
-  //   }, []);
-  //   console.log(arrProduct);
 
+const { Title } = Typography;
+
+export default function DashBoard() {
   return (
     <div className="container">
       <Row className="rowDashboard">
@@ -134,14 +93,22 @@ export default function DashBoard() {
             </Card>
           </Card>
         </Col>
-        <Col span={9} className="columnDashboard" id="columnDashboard2">
-          <Card title="Raw Cashew Nuts" bordered={false}>
-            <BarChart data={data} />
+
+        <Col span={8} className="columnDashboard" id="columnDashboard2">
+          <Card
+            title={<Title level={2}>Raw Cashew Nuts</Title>}
+            bordered={false}
+          >
+            <RawChart />
           </Card>{" "}
         </Col>
-        <Col span={9} className="columnDashboard" id="columnDashboard3">
-          <Card title="Finished Products" bordered={false}>
-            <BarChart data={data} />
+
+        <Col span={8} className="columnDashboard" id="columnDashboard3">
+          <Card
+            title={<Title level={2}>Finished Products</Title>}
+            bordered={false}
+          >
+            <FGChart />
           </Card>{" "}
         </Col>
       </Row>

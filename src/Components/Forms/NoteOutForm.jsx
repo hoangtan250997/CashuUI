@@ -5,6 +5,7 @@ import { Card } from "antd";
 import "../../CSS/scss/innotes.css";
 import "../../CSS/scss/styles.scss";
 const NoteOutForm = () => {
+  // const EMAIL_PATTERN = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   const formik = useFormik({
     initialValues: {
       supplierCode: "",
@@ -18,12 +19,8 @@ const NoteOutForm = () => {
       supplierCode: Yup.string(),
       // .required("Required")
       // .min(4, "Must be 4 characters or more"),
-      email: Yup.string()
-        .required("Required")
-        .matches(
-          /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-          "Please enter a valid email address"
-        ),
+      email: Yup.string().required("Required"),
+      // .matches(EMAIL_PATTERN, "Please enter a valid email address"),
       password: Yup.string()
         .required("Required")
         .matches(
