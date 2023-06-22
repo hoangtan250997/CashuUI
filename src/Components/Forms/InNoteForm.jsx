@@ -24,7 +24,7 @@ import Input from "@mui/material/Input";
 import { makeStyles } from "@mui/styles/";
 import { v4 as uuidv4 } from "uuid";
 import OutlinedInput from "@mui/material/OutlinedInput";
-
+import InNoteTable2 from "../Tables/InNoteTable2";
 import "../../CSS/scss/innotes.css";
 import "../../CSS/scss/styles.scss";
 import { auto } from "@popperjs/core";
@@ -32,20 +32,10 @@ import axios from "axios";
 
 // import Icon from "@ant-design/icons/lib/components/AntdIcon";
 
-const useStyles = makeStyles({
-  root: {
-    background: "rgb(220,200,200)",
-    boxShadow: "0px 0px 5px 2px rgb(173, 159, 168)",
-    padding: "0 30px",
-    borderRadius: "20px",
-  },
-});
-
-function NoteInForm() {
+function InNoteForm() {
   // Khởi tạo giá trị cho form
 
   //1
-  const classes = useStyles();
   const [goodsreceivednotes, setgoodsreceivednotes] = useState({
     supplierCode: "",
     note: "",
@@ -83,6 +73,8 @@ function NoteInForm() {
       }
     );
     setincomingDetailsCreateDTOList(newincomingDetailsCreateDTOList);
+    return <InNoteTable2 data={goodsreceivednotes} />;
+
     setgoodsreceivednotes((prevState) => ({
       ...prevState,
       incomingDetailsCreateDTOList: [...incomingDetailsCreateDTOList],
@@ -106,7 +98,7 @@ function NoteInForm() {
     // console.log("incomingDetailsCreateDTOList", incomingDetailsCreateDTOList);
 
     axios
-      .post("http://localhost:8080/goodsreceivednotes", { goodsreceivednotes })
+      .post("http://localhost:8080/goodsreceivednotes/1", goodsreceivednotes)
       .then((response) => {
         console.log(response.data); // Xử lý phản hồi từ máy chủ Java
       })
@@ -149,16 +141,8 @@ function NoteInForm() {
   };
 
   return (
-    <Container className={classes.root} style={{ height: "auto" }}>
-      <Typography
-        sx={{
-          fontSize: "h3.fontSize",
-          fontWeight: "bold",
-          textAlign: "center",
-        }}
-      >
-        IN NOTE FORM
-      </Typography>
+    <Container className="inNoteForm" style={{ height: "auto" }}>
+      <Typography className="title">IN NOTE FORM</Typography>
       <form onSubmit={merge}>
         {/* Nút Supplier Code */}
 
@@ -193,6 +177,7 @@ function NoteInForm() {
             // label="Note (Optional)"
             name="note"
             variant="outlined"
+            multiline
             value={goodsreceivednotes.note}
             // onChange={(event) => handleChangeInput(inputFields[0].id, event)}
             onChange={handleChange}
@@ -214,7 +199,10 @@ function NoteInForm() {
           {incomingDetailsCreateDTOList.map((incomingDetailsCreateDTO) => (
             <div key={incomingDetailsCreateDTO.id}>
               {/* Production Code */}
-              <FormControl sx={{ marginRight: 1, minWidth: 250 }}>
+              <FormControl
+                className="incomingDetailsCreateDTOList"
+                id="productCodeForm"
+              >
                 <InputLabel style={{ margin: "0" }}>Product Code</InputLabel>
                 <Select
                   labelId="productCode"
@@ -237,14 +225,15 @@ function NoteInForm() {
                   <MenuItem value="W210">W210</MenuItem>
                   <MenuItem value="W240">W240</MenuItem>
                 </Select>
-              </FormControl>{" "}
+              </FormControl>
               {/* Amount  */}
               <TextField
+                className="incomingDetailsCreateDTOList"
                 id="amount"
-                style={{ marginRight: "10px", minWidth: "250px" }}
                 name="amount"
                 label="Amount (kg)"
                 value={incomingDetailsCreateDTO.amount}
+                multiline
                 // onChange={(event) => {
                 //   handleChangeInput(event.target.id, event);
                 // handleInputChange(event);
@@ -258,10 +247,11 @@ function NoteInForm() {
               />
               {/* Cost */}
               <TextField
-                style={{ marginRight: "10px", minWidth: "250px" }}
+                className="incomingDetailsCreateDTOList"
                 name="cost"
                 label="Cost"
                 value={incomingDetailsCreateDTO.cost}
+                multiline
                 // onChange={(event) => {
                 //   handleChangeInput(inputField.id, event);
                 //   // handleInputChange(event);
@@ -273,8 +263,11 @@ function NoteInForm() {
                 // className={isFilled ? "filled" : "inNotesNode"}
               ></TextField>
               {/* Area */}
-              <FormControl sx={{ marginRight: 1, minWidth: 250 }}>
-                <InputLabel style={{ margin: "0" }}>Area</InputLabel>
+              <FormControl
+                className="incomingDetailsCreateDTOList"
+                id="areaFormControl"
+              >
+                <InputLabel>Area</InputLabel>
                 <Select
                   labelId="areaId"
                   name="areaId"
@@ -309,23 +302,29 @@ function NoteInForm() {
 
         {/* ----------------------------------------------------------------- */}
         {/* ----------------------------------------------------------------- */}
-        <div style={{ textAlign: "center", margin: "20px" }}>
+        <div
+          style={{
+            textAlign: "center",
+            marginBottom: "0px",
+            marginTop: "20px",
+          }}
+        >
           <Button
             sx={{
               background: "black",
               alignContent: "center",
             }}
-            className={classes.button}
+            className="inNoteButton"
             variant="contained"
             color="primary"
             type="submit"
             onClick={handleSubmit}
           >
-            Submit
+            Create Receipt
           </Button>
         </div>
       </form>
     </Container>
   );
 }
-export default NoteInForm;
+export default InNoteForm;
