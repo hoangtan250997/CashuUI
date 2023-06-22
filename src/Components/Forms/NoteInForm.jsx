@@ -28,6 +28,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import "../../CSS/scss/innotes.css";
 import "../../CSS/scss/styles.scss";
 import { auto } from "@popperjs/core";
+import axios from "axios";
 
 // import Icon from "@ant-design/icons/lib/components/AntdIcon";
 
@@ -55,7 +56,7 @@ function NoteInForm() {
   //+-
   const [incomingDetailsCreateDTOList, setincomingDetailsCreateDTOList] =
     useState([
-      { id: uuidv4(), productCode: "", amount: "", cost: "", areaCode: "" },
+      { id: uuidv4(), productCode: "", amount: "", cost: "", areaId: "" },
     ]);
 
   //1
@@ -103,7 +104,15 @@ function NoteInForm() {
     e.preventDefault();
 
     // console.log("incomingDetailsCreateDTOList", incomingDetailsCreateDTOList);
-    console.log("goodsreceivednotes", goodsreceivednotes);
+
+    axios
+      .post("http://localhost:8080/goodsreceivednotes", { goodsreceivednotes })
+      .then((response) => {
+        console.log(response.data); // Xử lý phản hồi từ máy chủ Java
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   //2
@@ -125,7 +134,7 @@ function NoteInForm() {
   const handleAddFields = () => {
     setincomingDetailsCreateDTOList([
       ...incomingDetailsCreateDTOList,
-      { id: uuidv4(), amount: "", cost: "", areaCode: "" },
+      { id: uuidv4(), amount: "", cost: "", areaId: "" },
     ]);
   };
   // Dấu -
@@ -267,9 +276,9 @@ function NoteInForm() {
               <FormControl sx={{ marginRight: 1, minWidth: 250 }}>
                 <InputLabel style={{ margin: "0" }}>Area</InputLabel>
                 <Select
-                  labelId="areaCode"
-                  name="areaCode"
-                  id="areaCode"
+                  labelId="areaId"
+                  name="areaId"
+                  id="areaId"
                   value={incomingDetailsCreateDTO.area}
                   label="Area Code"
                   onChange={(event) =>
@@ -279,9 +288,9 @@ function NoteInForm() {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value="W18">W18</MenuItem>
-                  <MenuItem value="W21">W21</MenuItem>
-                  <MenuItem value="W24">W24</MenuItem>
+                  <MenuItem value={17}>17</MenuItem>
+                  <MenuItem value={18}>18</MenuItem>
+                  <MenuItem value={19}>19</MenuItem>
                 </Select>
               </FormControl>
               {/* Button */}

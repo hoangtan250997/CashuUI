@@ -8,7 +8,7 @@ import Outnote from "./Pages/Out Notes/Out notes";
 import Analytics from "./Pages/Analytics/Analytics";
 import CompanyInfo from "./Pages/Company Info/Company Info";
 import { createRoot } from "react-dom/client";
-
+import Login from "./Pages/Sign in/Login";
 createRoot(document.getElementById("root")).render(
   <Router>
     <Routes>
@@ -18,6 +18,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="outnote" element={<Outnote />} />
         <Route path="analytics" element={<Analytics />} />
         <Route path="companyInfo" element={<CompanyInfo />} />
+        <Route path="login" element={<Login />} />
       </Route>
     </Routes>
   </Router>

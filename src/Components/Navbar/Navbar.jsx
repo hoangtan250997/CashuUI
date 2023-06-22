@@ -15,7 +15,6 @@ import cashew from "../../cashew3.png";
 
 import "../../CSS/scss/styles.scss";
 import "../../CSS/scss/styles.css";
-
 function Navbar() {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -111,22 +110,14 @@ function Navbar() {
           }}
         />
         <Menu.Item className="menuItem">
-          <div className="content">
-            <LogoutOutlined className="icon" />
-            <span>Log out</span>
-          </div>
+          <NavLink to="/signin">
+            <div className="content">
+              <LogoutOutlined className="icon" />
+              <span>Log out</span>
+            </div>
+          </NavLink>
         </Menu.Item>
-        {/* <Menu.Item className="menuItem">
-          <div className="content">
-            <Switch
-              Switch
-              defaultChecked
-              // onChange={onChange}
-              className="icon"
-            />
-            <span>Dark Mode</span>
-          </div>
-        </Menu.Item> */}
+
       </Menu>
       <div id="gif" className="logo-container">
         <img
