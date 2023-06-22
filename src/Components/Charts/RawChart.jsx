@@ -24,8 +24,8 @@ const CustomPieChart = () => {
     count: item.totalStockAmount,
   }));
 
-  const numFormatter = new Intl.NumberFormat('en-US');
-  const total = data.reduce((sum, d) => sum + d['count'], 0);
+  const numFormatter = new Intl.NumberFormat("en-US");
+  const total = data.reduce((sum, d) => sum + d["count"], 0);
 
   const options = {
     autoSize: true,
@@ -42,7 +42,7 @@ const CustomPieChart = () => {
           enabled: false,
         },
         sectorLabel: {
-          color: "white",
+          color: "transparent",
           fontWeight: "bold",
           formatter: ({ datum, sectorLabelKey }) => {
             const value = datum[sectorLabelKey];
@@ -58,8 +58,8 @@ const CustomPieChart = () => {
           "#8EACD0",
           "#67A3D9",
           "#8EACD0",
-          '#67A3D9',
-          '#CD5E77'
+          "#67A3D9",
+          "#CD5E77",
         ],
         innerRadiusRatio: 0.5,
         innerLabels: [

@@ -1,42 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Card, Statistic, Typography } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
-
+import Widget from "../../Components/Charts/Widget";
 import RawChart from "../../Components/Charts/RawChart";
 import FGChart from "../../Components/Charts/FGChart";
-import IncomingTable from "../../Components/Tables/ImcomingTable";
-// import { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import Product from "../../Components/Product/product";
-// import { getProductApi } from "../../redux/reducers/productReducer";
-// import Carousel_Home from "./Carousel_Home";
-
-const incomingData = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-  },
-  {
-    key: "2",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
-  },
-  {
-    key: "3",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-  },
-  {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-  },
-];
+import OutgoingTable from "../../Components/Tables/OutgoingTable";
 
 const { Title } = Typography;
 
@@ -44,7 +12,18 @@ export default function DashBoard() {
   return (
     <div className="container">
       <Row className="rowDashboard">
-        <Col span={5} className="columnDashboard" id="columnDashboard1">
+        {/* <div className="home">
+      <Sidebar />
+      <div className="homeContainer">
+        <Navbar /> */}
+        <div className="widgets">
+          <Widget type="incoming" />
+          <Widget type="outgoing" />
+          <Widget type="stock" />
+        </div>
+        {/* </div>
+        </div> */}
+        {/* <Col span={5} className="columnDashboard" id="columnDashboard1">
           <Card title="Monthly Warehouse Overview" bordered={false}>
             <Card
               bordered={true}
@@ -91,8 +70,9 @@ export default function DashBoard() {
                 suffix="%"
               />
             </Card>
-          </Card>
-        </Col>
+          </Card> */}
+
+        {/* </Col> */}
 
         <Col span={8} className="columnDashboard" id="columnDashboard2">
           <Card
@@ -113,9 +93,9 @@ export default function DashBoard() {
         </Col>
       </Row>
       <Row className="rowDashboard">
-        <Col span={24}>
+        <Col span={23}>
           <Card>
-            <IncomingTable data={incomingData} />
+            <OutgoingTable />
           </Card>
         </Col>
       </Row>

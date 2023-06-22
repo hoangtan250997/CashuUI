@@ -1,21 +1,45 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { Button, Input, Space, Table } from "antd";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import axios from "axios";
 import Highlighter from "react-highlight-words";
+import moment from "moment";
 
-const IncomingTable = ({ data }) => {
+const OutgoingTable = () => {
+  const [outgoingData, setOutgoingData] = useState([]);
+
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/outgoingdetails/outnote-customer"
+      );
+      setOutgoingData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
+
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
   };
+
   const handleReset = (clearFilters) => {
     clearFilters();
     setSearchText("");
   };
+
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
       setSelectedKeys,
@@ -118,56 +142,75 @@ const IncomingTable = ({ data }) => {
         text
       ),
   });
+
   const columns = [
     {
       title: "No",
       dataIndex: "no",
       key: "no",
       width: "5%",
-      //   ...getColumnSearchProps("no"),
-      sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
-    },
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      width: "20%",
-      ...getColumnSearchProps("name"),
+      align: "center",
+      render: (text, record, index) => (page - 1) * 10 + index + 1,
     },
     {
       title: "Code",
-      dataIndex: "code",
+      dataIndex: "gdnCode",
       key: "code",
       width: "10%",
+      align: "center",
       ...getColumnSearchProps("code"),
     },
     {
-      title: "Amount (MTs)",
-      dataIndex: "amount",
-      key: "amount",
-
-      ...getColumnSearchProps("amount"),
-    },
-    {
       title: "Customer",
-      dataIndex: "customer",
+      dataIndex: "customerName",
       key: "customer",
+      width: "15%",
+      align: "center",
       ...getColumnSearchProps("customer"),
     },
     {
       title: "Customer Email",
-      dataIndex: "email",
+      dataIndex: "customerEmail",
       key: "email",
+      width: "15%",
+      align: "center",
       ...getColumnSearchProps("email"),
+    },
+
+    {
+      title: "Total Amount (MTs)",
+      dataIndex: "totalAmount",
+      key: "amount",
+      width: "10%",
+      align: "center",
+      ...getColumnSearchProps("amount"),
+      render: (text) => <span>{text.toLocaleString()}</span>,
     },
     {
       title: "Delivery Date",
-      dataIndex: "date",
+      dataIndex: "outgoingDate",
       key: "date",
+      width: "10%",
+      align: "center",
       ...getColumnSearchProps("date"),
+      render: (text) => moment(text).format("YYYY-MM-DD"),
     },
   ];
-  return <Table columns={columns} dataSource={data} />;
+
+  return (
+    <Table
+      columns={columns}
+      dataSource={outgoingData}
+      pagination={{
+        pageSize: 10,
+        pageSizeOptions: ["10"],
+        defaultPageSize: 10,
+        onChange(current) {
+          setPage(current);
+        },
+      }}
+    />
+  );
 };
-export default IncomingTable;
+
+export default OutgoingTable;
