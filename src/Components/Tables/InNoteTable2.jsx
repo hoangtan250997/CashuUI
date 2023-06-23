@@ -6,21 +6,20 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-export default function InNoteTable2({ data }) {
-  const TAX_RATE = 0.07;
 
+export default function InNoteTable2(props) {
+  const currentDate = new Date().toLocaleDateString();
+
+  const TAX_RATE = 0.07;
+  const { goodsreceivednotes } = props;
+
+  console.log("Tables", goodsreceivednotes);
   function ccyFormat(num) {
     return `${num.toFixed(2)}`;
   }
 
-  //Bỏ
-  function priceRow(qty, unit) {
-    return qty * unit;
-  }
-
   //Tự động tạo hàng mới
-  function createRow(desc, qty, unit) {
-    const price = priceRow(qty, unit);
+  function createRow(desc, qty, unit, price) {
     return { desc, qty, unit, price };
   }
 
@@ -28,16 +27,33 @@ export default function InNoteTable2({ data }) {
   function subtotal(items) {
     return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
   }
-  //Dùng giá trị đẻ tạo row
-  const rows = [
-    createRow("Paperclips (Box)", 100, 1.15),
-    createRow("Paper (Case)", 10, 45.99),
-    createRow("Waste Basket", 2, 17.99),
-  ];
+  //Dùng giá trị để tạo row
+  const rows = [];
+  if (
+    goodsreceivednotes &&
+    goodsreceivednotes.incomingDetailsCreateDTOList &&
+    goodsreceivednotes.incomingDetailsCreateDTOList.length !== 0
+  ) {
+    goodsreceivednotes.incomingDetailsCreateDTOList.forEach((item) => {
+      const row = createRow(
+        item.productCode,
+        item.amount,
+        item.cost,
+        item.areaId
+      );
+      rows.push(row);
+    });
+  }
 
-  const invoiceSubtotal = subtotal(rows);
-  const invoiceTaxes = TAX_RATE * invoiceSubtotal;
-  const invoiceTotal = invoiceTaxes + invoiceSubtotal;
+  // const rows = [
+  //   createRow("Paperclips (Box)", 100, 1.15),
+  //   createRow("Paper (Case)", 10, 45.99),
+  //   createRow("Waste Basket", 2, 17.99),
+  // ];
+
+  // const invoiceSubtotal = subtotal(rows);
+  // const invoiceTaxes = TAX_RATE * invoiceSubtotal;
+  // const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
   return (
     <TableContainer component={Paper}>
@@ -53,15 +69,18 @@ export default function InNoteTable2({ data }) {
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell align="left" colSpan={1} style={{ fontWeight: "600" }}>
-              Supplier Code: {data.supplierCode}
+            <TableCell align="left" colSpan={2} style={{ fontWeight: "600" }}>
+              Supplier Code: {goodsreceivednotes.supplierCode}
             </TableCell>
 
-            <TableCell align="left" colSpan={1} style={{ fontWeight: "600" }}>
-              Date:
+            <TableCell align="left" colSpan={2} style={{ fontWeight: "600" }}>
+              Date: {currentDate}
             </TableCell>
-            <TableCell align="left" colSpan={2} style={{ fontStyle: "italic" }}>
-              Note:
+          </TableRow>
+          <TableRow>
+            <TableCell align="left" colSpan={4} style={{ fontStyle: "italic" }}>
+              Note: {""}
+              {goodsreceivednotes.note}
             </TableCell>
           </TableRow>
           <TableRow>
@@ -75,28 +94,28 @@ export default function InNoteTable2({ data }) {
           {rows.map((row) => (
             <TableRow key={row.desc}>
               <TableCell>{row.desc}</TableCell>
-              <TableCell align="right">{row.qty}</TableCell>
-              <TableCell align="right">{row.unit}</TableCell>
-              <TableCell align="right">{ccyFormat(row.price)}</TableCell>
+              <TableCell align="left">{row.qty}</TableCell>
+              <TableCell align="left">{row.unit}</TableCell>
+              <TableCell align="left">{row.price}</TableCell>
             </TableRow>
           ))}
 
-          <TableRow>
+          {/* <TableRow>
             <TableCell rowSpan={3} />
             <TableCell colSpan={2}>Subtotal</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
-          </TableRow>
-          <TableRow>
+            <TableCell align="left">{ccyFormat(invoiceSubtotal)}</TableCell>
+          </TableRow> */}
+          {/* <TableRow>
             <TableCell>Tax</TableCell>
-            <TableCell align="right">{`${(TAX_RATE * 100).toFixed(
+            <TableCell align="left">{`${(TAX_RATE * 100).toFixed(
               0
             )} %`}</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
+            <TableCell align="left">{ccyFormat(invoiceTaxes)}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell colSpan={2}>Total</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
-          </TableRow>
+            <TableCell align="left">{ccyFormat(invoiceTotal)}</TableCell>
+          </TableRow> */}
         </TableBody>
       </Table>
     </TableContainer>

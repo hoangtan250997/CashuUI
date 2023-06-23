@@ -22,12 +22,12 @@ export default function Innote() {
 
   return (
     <Grid container spacing={1}>
-      <Grid xs={6}>
-        <InNoteForm />
-      </Grid>
-      <Grid xs={6}>
+      {/* <Grid xs={6}> */}
+      <InNoteForm />
+      {/* </Grid> */}
+      {/* <Grid xs={6}>
         <InNoteTable2 />
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 }
