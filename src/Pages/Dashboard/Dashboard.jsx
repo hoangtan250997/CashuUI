@@ -16,11 +16,11 @@ export default function DashBoard() {
       <Sidebar />
       <div className="homeContainer">
         <Navbar /> */}
-        <div className="widgets">
+        {/* <div className="widgets">
           <Widget type="incoming" />
           <Widget type="outgoing" />
           <Widget type="stock" />
-        </div>
+        </div> */}
         {/* </div>
         </div> */}
         {/* <Col span={5} className="columnDashboard" id="columnDashboard1">
