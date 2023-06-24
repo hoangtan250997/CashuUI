@@ -45,6 +45,17 @@ export const http = axios.create({
   timeout: 30000,
 });
 
+// Gửi yêu cầu HTTP để lấy cấu hình từ backend
+// axios.get("/api/config").then((response) => {
+//   const config = response.data;
+
+//   // Sử dụng cấu hình lấy từ backend để tạo đối tượng Axios
+//   const http = axios.create({
+//     baseURL: config.baseURL,
+//     timeout: config.timeout,
+//   });
+// });
+
 http.interceptors.request.use(
   (config) => {
     config.headers = {

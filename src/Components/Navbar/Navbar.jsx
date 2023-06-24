@@ -61,7 +61,7 @@ function Navbar() {
         mode="inline"
         inlineCollapsed={collapsed}
       >
-        <Menu.Item className="menuItem">
+        <Menu.Item className="menuItem" key="1">
           <div className="content">
             <NavLink to="/dashboard">
               <DashboardOutlined className="icon" />
@@ -69,7 +69,7 @@ function Navbar() {
             </NavLink>
           </div>
         </Menu.Item>
-        <Menu.Item className="menuItem">
+        <Menu.Item className="menuItem" key="2">
           <div className="content">
             <NavLink to="/analytics">
               <LineChartOutlined className="icon" />
@@ -77,7 +77,7 @@ function Navbar() {
             </NavLink>
           </div>
         </Menu.Item>
-        <Menu.Item className="menuItem">
+        <Menu.Item className="menuItem" key="3">
           <div className="content">
             <NavLink to="/innote">
               <EditOutlined className="icon" />
@@ -85,7 +85,7 @@ function Navbar() {
             </NavLink>
           </div>
         </Menu.Item>
-        <Menu.Item className="menuItem">
+        <Menu.Item className="menuItem" key="4">
           <div className="content">
             <NavLink to="/outnote">
               <PrinterOutlined className="icon" />
@@ -93,7 +93,7 @@ function Navbar() {
             </NavLink>
           </div>
         </Menu.Item>
-        <Menu.Item className="menuItem">
+        <Menu.Item className="menuItem" key="5">
           <div className="content">
             <NavLink to="/companyInfo">
               <SolutionOutlined className="icon" />
@@ -109,15 +109,14 @@ function Navbar() {
             marginTop: "30",
           }}
         />
-        <Menu.Item className="menuItem">
-          <NavLink to="/signin">
+        <Menu.Item className="menuItem" key="6">
+          <NavLink to="/login">
             <div className="content">
               <LogoutOutlined className="icon" />
               <span>Log out</span>
             </div>
           </NavLink>
         </Menu.Item>
-
       </Menu>
       <div id="gif" className="logo-container">
         <img

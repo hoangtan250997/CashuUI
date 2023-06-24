@@ -159,7 +159,7 @@ function InNoteForm() {
       incomingDetailsCreateDTOList: incomingDetailsCreateDTOList,
     };
     setgoodsreceivednotes(updatedGoodsReceivedNotes);
-    console.log("size InNoteForm: ", incomingDetailsCreateDTOList.length);
+    console.log("size <InNoteForm></InNoteForm>: ", incomingDetailsCreateDTOList.length);
   };
 
   return (

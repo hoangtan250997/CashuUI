@@ -2,6 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { history } from "../..";
+
 import {
   ACCESS_TOKEN,
   getStore,
@@ -10,7 +11,7 @@ import {
   saveStore,
   saveStoreJson,
   USER_LOGIN,
-} from "../../util/config";
+} from "../../util/config.jsx";
 
 const initialState = {
   userLogin: getStoreJson(USER_LOGIN),
