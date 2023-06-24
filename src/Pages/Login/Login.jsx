@@ -3,10 +3,15 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { loginApi } from "../../redux/reducers/userReducer";
 import { useDispatch } from "react-redux";
-
+import { removeStore } from "../../util/config";
 export const Login = () => {
   const dispatch = useDispatch();
 
+  const remove = () => {
+    // const rmAsync = removeStore("userLogin");
+    // dispatch(rmAsync);
+    localStorage.removeItem("userLogin");
+  };
   const form = useFormik({
     initialValues: {
       username: "",
@@ -17,7 +22,6 @@ export const Login = () => {
       password: yup.string().required("Password cannot be blank!"),
     }),
     onSubmit: (values) => {
-      console.log("account: ", values);
       const actionAsync = loginApi(values);
       dispatch(actionAsync);
     },
@@ -34,7 +38,7 @@ export const Login = () => {
         <h3 className="login">Login</h3>
 
         <div className="form-group emailLogin">
-          <p>Email</p>
+          <p>Username</p>
           <input
             placeholder="Username"
             className="form-control"
@@ -63,6 +67,9 @@ export const Login = () => {
         <div className="form-group submitLogin">
           <button className="btn btn-success mt-2 btnLogin" type="submit">
             LOGIN
+          </button>
+          <button className="btn btn-success mt-2 btnLogin" onClick={remove}>
+            REMOVE
           </button>
         </div>
       </form>

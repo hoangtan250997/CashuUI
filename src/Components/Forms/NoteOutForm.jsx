@@ -1,10 +1,13 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Card } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 
 import "../../CSS/scss/innotes.css";
 import "../../CSS/scss/styles.scss";
 const NoteOutForm = () => {
+  const { userLogin } = useSelector((state) => state.userReducer);
+  console.log(userLogin);
   const formik = useFormik({
     initialValues: {
       supplierCode: "",

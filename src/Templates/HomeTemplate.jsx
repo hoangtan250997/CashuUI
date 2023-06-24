@@ -3,36 +3,44 @@ import NavBar from "../Components/Navbar/Navbar";
 import Footer from "../Components/FooterHome/FooterHome";
 import HeaderDashboard from "../Components/Header/HeaderHome";
 import { Outlet } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Login } from "../Pages/Login/Login";
 import "../CSS/scss/styles.css";
+
 export const HomeTemplate = () => {
-  return (
-    <div
-      style={{
-        height: "95vh",
-        display: "grid",
-        gridTemplateColumns: "256px 1fr",
-        gap: "20px",
-        // padding: "1vh",
-      }}
-    >
-      <div>
-        <NavBar />
-      </div>
+  const { userLogin } = useSelector((state) => state.userReducer);
+  if (userLogin) {
+    return (
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          // gap: "20px",
+          height: "95vh",
+          display: "grid",
+          gridTemplateColumns: "256px 1fr",
+          gap: "20px",
+          // padding: "1vh",
         }}
       >
-        <HeaderDashboard />
-
-        <div style={{ flex: 1, marginTop: 20 }}>
-          <Outlet />
+        <div>
+          <NavBar />
         </div>
-        <Footer />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+            // gap: "20px",
+          }}
+        >
+          <HeaderDashboard />
+
+          <div style={{ flex: 1, marginTop: 20 }}>
+            <Outlet />
+          </div>
+          <Footer />
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return <Login />;
+  }
 };

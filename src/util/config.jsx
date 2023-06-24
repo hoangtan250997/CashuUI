@@ -10,11 +10,14 @@ export const { saveStore, saveStoreJson, getStore, getStoreJson, removeStore } =
   {
     saveStore: (name, stringValue) => {
       console.log("1");
+      console.log(name, stringValue);
       localStorage.setItem(name, stringValue);
       return stringValue;
     },
     saveStoreJson: (name, value) => {
-      console.log("2");
+      console.log("2 ");
+      console.log(name, value);
+
       let sValue = JSON.stringify(value);
       localStorage.setItem(name, sValue);
       return value;
@@ -32,16 +35,17 @@ export const { saveStore, saveStoreJson, getStore, getStoreJson, removeStore } =
       console.log("4 name ", name);
 
       if (localStorage.getItem(name)) {
-        console.log("not null");
-
+        console.log(JSON.parse(localStorage.getItem(name)));
         return JSON.parse(localStorage.getItem(name));
       }
       return null;
     },
     removeStore: (name) => {
-      console.log("5");
+      console.log("5", name);
 
       if (localStorage.getItem(name)) {
+        console.log("6", name);
+
         localStorage.removeItem(name);
       }
     },
@@ -54,29 +58,13 @@ const http = axios.create({
   timeout: 3000,
 });
 export const signIn = (data) => {
-  console.log("request before", request);
   return request({
     url: "/auth/signin",
     method: "POST",
     data,
   });
 };
-// http.interceptors.request.use(
-//   (config) => {
-//     config.headers = {
-//       ...config.headers,
-//       Authorization: `Bearer ${getStore(ACCESS_TOKEN)}`,
-//     };
-//     return config;
-//   },
-//   (err) => {
-//     return Promise.reject(err);
-//   }
-// );
 
-// export const httpb = axios.create({
-//     baseURL:'https://shop2.cyberlearn.vn'
-// })
 //Cấu hình cho tất cả các response api
 http.interceptors.response.use(
   (res) => {

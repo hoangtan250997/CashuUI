@@ -14,7 +14,6 @@ import {
 
 const initialState = {
   userLogin: getStoreJson(USER_LOGIN),
-  // userLogin: {},
 };
 
 const userReducer = createSlice({
@@ -40,18 +39,19 @@ export const loginApi = (userLogin) => {
 
     console.log("result ", result);
 
-    console.log("obDangNhap", result.data);
+    console.log("obDangNhap", result.data.username);
     //Cập nhật cho reducer
     const action = loginAction(result.data);
     dispatch(action);
+    console.log("loginAction", result.data);
     //Lưu localstorage
     saveStoreJson(USER_LOGIN, result.data);
-    saveStore(ACCESS_TOKEN, result.data.accessToken);
+    saveStore(ACCESS_TOKEN, result.data.token);
     //Gọi axios lấy dữ liệu api từ token
     //Gọi api getprofile
     alert("Dang nhap thanh cong!");
     // history.push("/dashboard");
-    window.location.href = "/dashboard";
+    // window.location.href = "/dashboard";
 
     //HOANG
     // localStorage.setItem("USER_INFO_KEY", JSON.stringify(result.data));

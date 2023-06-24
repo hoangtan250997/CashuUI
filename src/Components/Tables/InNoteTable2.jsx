@@ -9,7 +9,14 @@ import Paper from "@mui/material/Paper";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function InNoteTable2(props) {
-  const { user } = useSelector((state) => state.userReducer);
+  const { userLogin } = useSelector((state) => state.userReducer);
+  if (userLogin === null) {
+    // Xử lý khi user là null
+    console.log("User không tồn tại.");
+  } else {
+    // Xử lý khi user không phải là null
+    console.log("User tồn tại.", userLogin);
+  }
   const dispatch = useDispatch();
 
   const currentDate = new Date().toLocaleDateString();
@@ -71,7 +78,7 @@ export default function InNoteTable2(props) {
               Date: {currentDate}
             </TableCell>
             <TableCell align="left" colSpan={2} style={{ fontWeight: "600" }}>
-              Staff: {currentDate}
+              Staff: {userLogin.username}
             </TableCell>
           </TableRow>
           <TableRow>
@@ -96,23 +103,6 @@ export default function InNoteTable2(props) {
               <TableCell align="left">{row.price}</TableCell>
             </TableRow>
           ))}
-
-          {/* <TableRow>
-            <TableCell rowSpan={3} />
-            <TableCell colSpan={2}>Subtotal</TableCell>
-            <TableCell align="left">{ccyFormat(invoiceSubtotal)}</TableCell>
-          </TableRow> */}
-          {/* <TableRow>
-            <TableCell>Tax</TableCell>
-            <TableCell align="left">{`${(TAX_RATE * 100).toFixed(
-              0
-            )} %`}</TableCell>
-            <TableCell align="left">{ccyFormat(invoiceTaxes)}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell colSpan={2}>Total</TableCell>
-            <TableCell align="left">{ccyFormat(invoiceTotal)}</TableCell>
-          </TableRow> */}
         </TableBody>
       </Table>
     </TableContainer>
