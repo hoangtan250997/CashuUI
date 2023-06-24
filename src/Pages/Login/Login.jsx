@@ -9,14 +9,11 @@ export const Login = () => {
 
   const form = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
     },
     validationSchema: yup.object().shape({
-      email: yup
-        .string()
-        .required("Email cannot be blank!")
-        .email("Email is invalid!"),
+      username: yup.string().required("Username cannot be blank!"),
       password: yup.string().required("Password cannot be blank!"),
     }),
     onSubmit: (values) => {
@@ -39,9 +36,9 @@ export const Login = () => {
         <div className="form-group emailLogin">
           <p>Email</p>
           <input
-            placeholder="email"
+            placeholder="Username"
             className="form-control"
-            name="email"
+            name="username"
             onChange={form.handleChange}
             onBlur={form.handleBlur}
           />

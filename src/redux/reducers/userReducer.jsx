@@ -1,23 +1,20 @@
 //rxslice
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { history } from "../..";
+import { history } from "../../index";
 
+import { signIn } from "../../util/config";
 import {
   ACCESS_TOKEN,
-  getStore,
-  getStoreJson,
   http,
+  getStoreJson,
   saveStore,
   saveStoreJson,
   USER_LOGIN,
-} from "../../util/config.jsx";
+} from "../../util/config";
 
 const initialState = {
   userLogin: getStoreJson(USER_LOGIN),
-  userProfile: {},
-  userRegister: null,
-  userUpdateProfile: {},
+  // userLogin: {},
 };
 
 const userReducer = createSlice({
@@ -27,73 +24,37 @@ const userReducer = createSlice({
     loginAction: (state, action) => {
       state.userLogin = action.payload;
     },
-    getProfileAction: (state, action) => {
-      state.userProfile = action.payload;
-    },
-    registerAction: (state, action) => {
-      state.userRegister = action.payload;
-    },
-    updateProfileAction: (state, action) => {
-      state.userUpdateProfile = action.payload;
-    },
   },
 });
 
-export const {
-  loginAction,
-  getProfileAction,
-  registerAction,
-  updateProfileAction,
-} = userReducer.actions;
+export const { loginAction } = userReducer.actions;
 
 export default userReducer.reducer;
 
 /* async action */
-//userLogin = {email,password}
 export const loginApi = (userLogin) => {
   return async (dispatch) => {
-    const result = await http.post("/api/Users/signin", userLogin);
-    console.log("obDangNhap", result.data.content);
+    console.log("user ", userLogin);
+
+    const result = await signIn(userLogin);
+
+    console.log("result ", result);
+
+    console.log("obDangNhap", result.data);
     //Cập nhật cho reducer
-    const action = loginAction(result.data.content);
+    const action = loginAction(result.data);
     dispatch(action);
     //Lưu localstorage
-    saveStoreJson(USER_LOGIN, result.data.content);
-    saveStore(ACCESS_TOKEN, result.data.content.accessToken);
+    saveStoreJson(USER_LOGIN, result.data);
+    saveStore(ACCESS_TOKEN, result.data.accessToken);
     //Gọi axios lấy dữ liệu api từ token
     //Gọi api getprofile
-    const actionGetProfile = getProfileAction();
-    dispatch(actionGetProfile);
     alert("Dang nhap thanh cong!");
-    history.push("/profile");
-  };
-};
+    // history.push("/dashboard");
+    window.location.href = "/dashboard";
 
-export const registerApi = (userRegister) => {
-  return async (dispatch) => {
-    const result = await http.post("/api/Users/signup", userRegister);
-    console.log("obDangKy", result.data);
-    const action = registerAction(result.data.content);
-    dispatch(action);
-    alert("Dang ki thanh cong!");
-    history.push("/login");
-  };
-};
-export const updateProfileApi = (userRegister) => {
-  return async (dispatch) => {
-    const result = await http.post("/api/Users/updateProfile", userRegister);
-    console.log("obUpdateProfile", result.data);
-    const action = updateProfileAction(result.data.content);
-    dispatch(action);
-    alert("Update thanh cong!");
-    history.push("/profile");
-  };
-};
-export const getProfileApi = () => {
-  return async (dispatch) => {
-    const result = await http.post("/api/Users/getProfile");
-    //Sau khi lấy dữ liệu từ api về đưa lên reducer qua action creator
-    const action = getProfileAction(result.data.content);
-    dispatch(action);
+    //HOANG
+    // localStorage.setItem("USER_INFO_KEY", JSON.stringify(result.data));
+    //-----
   };
 };

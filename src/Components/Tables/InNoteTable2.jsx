@@ -6,8 +6,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function InNoteTable2(props) {
+  const { user } = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+
   const currentDate = new Date().toLocaleDateString();
 
   const TAX_RATE = 0.07;
@@ -45,16 +49,6 @@ export default function InNoteTable2(props) {
     });
   }
 
-  // const rows = [
-  //   createRow("Paperclips (Box)", 100, 1.15),
-  //   createRow("Paper (Case)", 10, 45.99),
-  //   createRow("Waste Basket", 2, 17.99),
-  // ];
-
-  // const invoiceSubtotal = subtotal(rows);
-  // const invoiceTaxes = TAX_RATE * invoiceSubtotal;
-  // const invoiceTotal = invoiceTaxes + invoiceSubtotal;
-
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="spanning table">
@@ -69,12 +63,15 @@ export default function InNoteTable2(props) {
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell align="left" colSpan={2} style={{ fontWeight: "600" }}>
+            <TableCell align="left" colSpan={1} style={{ fontWeight: "600" }}>
               Supplier Code: {goodsreceivednotes.supplierCode}
             </TableCell>
 
-            <TableCell align="left" colSpan={2} style={{ fontWeight: "600" }}>
+            <TableCell align="left" colSpan={1} style={{ fontWeight: "600" }}>
               Date: {currentDate}
+            </TableCell>
+            <TableCell align="left" colSpan={2} style={{ fontWeight: "600" }}>
+              Staff: {currentDate}
             </TableCell>
           </TableRow>
           <TableRow>

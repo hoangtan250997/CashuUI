@@ -25,12 +25,12 @@ createRoot(document.getElementById("root")).render(
     <HistoryRouter history={history}>
       <Routes>
         <Route path="/" element={<HomeTemplate />}>
-          <Route path="dashboard" index element={<DashBoard />} />
+          <Route path="dashboard" element={<DashBoard />} />
           <Route path="innote" element={<Innote />} />
           <Route path="outnote" element={<Outnote />} />
           <Route path="analytics" element={<Analytics />} />
           <Route path="companyInfo" element={<CompanyInfo />} />
-          <Route path="login" element={<Login />} />
+          <Route index path="login" element={<Login />} />
         </Route>
       </Routes>
     </HistoryRouter>
