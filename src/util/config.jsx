@@ -65,6 +65,19 @@ export const signIn = (data) => {
   });
 };
 
+// http.interceptors.request.use(
+//   (config) => {
+//     config.headers = {
+//       ...config.headers,
+//       // Authorization: `Bearer ${getStore(ACCESS_TOKEN)}`,
+//       Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ2Y2FzZXkiLCJpYXQiOjE2ODc2MjY0NzUsImV4cCI6MTY4NzY2OTY3NX0.wR6SJKWpIvP7O6HuWHqzjHQIS49xDIFaE4mr5bksz2Wf0SL63GU8REIST-MHA4FQzeh1mp2rUwSPZRfkzXHScQ`,
+//     };
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
 //Cấu hình cho tất cả các response api
 http.interceptors.response.use(
   (res) => {

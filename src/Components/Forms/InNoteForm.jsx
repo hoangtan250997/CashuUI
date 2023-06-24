@@ -6,7 +6,7 @@
 // import { IconName } from "react-icons/ai";
 // import { HiMinus, HiPlus } from 'react-icons/hi';
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, FormControl } from "@mui/material/";
 import TextField from "@mui/material/TextField";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
@@ -34,6 +34,19 @@ import Grid from "@mui/material/Unstable_Grid2";
 // import Icon from "@ant-design/icons/lib/components/AntdIcon";
 
 function InNoteForm() {
+  const [chartData, setChartData] = useState([]);
+  useEffect(() => {
+    fetchData();
+  }, []);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/suppliers");
+      setChartData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   // Khởi tạo giá trị cho form
   //1
 
@@ -159,7 +172,10 @@ function InNoteForm() {
       incomingDetailsCreateDTOList: incomingDetailsCreateDTOList,
     };
     setgoodsreceivednotes(updatedGoodsReceivedNotes);
-    console.log("size <InNoteForm></InNoteForm>: ", incomingDetailsCreateDTOList.length);
+    console.log(
+      "size <InNoteForm></InNoteForm>: ",
+      incomingDetailsCreateDTOList.length
+    );
   };
 
   return (
@@ -188,9 +204,9 @@ function InNoteForm() {
                 value={goodsreceivednotes.supplierCode}
                 onChange={handleChange}
               >
-                <MenuItem value="SHRI">SHRI</MenuItem>
-                <MenuItem value="SDE">SDE</MenuItem>
-                <MenuItem value="TAN">TAN</MenuItem>
+                {chartData.map((item) => (
+                  <MenuItem value={item.name}>{item.name}</MenuItem>
+                ))}
               </Select>
 
               {/* Nút Note */}

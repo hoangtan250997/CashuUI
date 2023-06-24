@@ -1,12 +1,16 @@
-import { useState, useEffect } from "react";
+// apiService.js
 import axios from "axios";
 
-export const fetchChartData = async () => {
-  try {
-    const response = await axios.get("http://localhost:8080/countries");
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return [];
-  }
+const apiService = {
+  get: async (url) => {
+    try {
+      const response = await axios.get(url);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      throw error;
+    }
+  },
 };
+
+export default apiService;
