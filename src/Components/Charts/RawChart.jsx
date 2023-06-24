@@ -42,7 +42,7 @@ const CustomPieChart = () => {
           enabled: false,
         },
         sectorLabel: {
-          color: "transparent",
+          color: "white",
           fontWeight: "bold",
           formatter: ({ datum, sectorLabelKey }) => {
             const value = datum[sectorLabelKey];
