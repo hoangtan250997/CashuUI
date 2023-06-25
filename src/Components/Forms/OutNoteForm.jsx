@@ -1,10 +1,6 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
-// import { Card } from "antd";
-// // import Icon from "@ant-design/icons/lib/components/AntdIcon";
-// // import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
-// import { IconName } from "react-icons/ai";
-// import { HiMinus, HiPlus } from 'react-icons/hi';
+import { v4 as uuidv4 } from "uuid";
 
 import React, { useState, useEffect } from "react";
 import { Container, FormControl } from "@mui/material/";
@@ -16,38 +12,22 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import Icon from "@mui/material/Icon";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import InputAdornment from "@mui/material/InputAdornment";
-import Input from "@mui/material/Input";
-import { makeStyles } from "@mui/styles/";
-import { v4 as uuidv4 } from "uuid";
-import OutlinedInput from "@mui/material/OutlinedInput";
+
 import InNoteTable2 from "../Tables/InNoteTable2";
 import "../../CSS/scss/innotes.css";
 import "../../CSS/scss/styles.scss";
-import { auto } from "@popperjs/core";
 import axios from "axios";
 import Grid from "@mui/material/Unstable_Grid2";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { format } from "date-fns";
 import dayjs from "dayjs";
 
 const today = dayjs();
 
-var options = {
-  year: "numeric",
-  month: "2-digit",
-  day: "2-digit",
-  hour: "2-digit",
-  minute: "2-digit",
-  second: "2-digit",
-};
-
-function InNoteForm() {
+function OutNoteForm() {
   //Supplier + Production + Area
   const [supplierData, setsupplierData] = useState([]);
   const [productionData, setproductionData] = useState([]);
@@ -195,25 +175,6 @@ function InNoteForm() {
     }));
   };
 
-  //1+2
-  // Tạo ra object cho form
-  // const merge = (event) => {
-  //   const updatedGoodsReceivedNotes = {
-  //     ...goodsreceivednotes,
-  //     incomingDetailsCreateDTOList: incomingDetailsCreateDTOList,
-  //   };
-
-  //   setgoodsreceivednotes(updatedGoodsReceivedNotes);
-  //   // const incomingDetailsCreateDTOList1 =(...incomingDetailsCreateDTOList);
-  //   const updatedGoodsReceivedNotesDTO = {
-  //     ...goodsreceivednotesDTO,
-  //     incomingDetailsCreateDTOList: [...incomingDetailsCreateDTOList],
-  //   };
-
-  //   setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
-  //
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -224,7 +185,6 @@ function InNoteForm() {
     };
 
     setgoodsreceivednotes(mergeupdatedGoodsReceivedNotes);
-    // const incomingDetailsCreateDTOList1 =(...incomingDetailsCreateDTOList);
     const mergeupdatedGoodsReceivedNotesDTO = {
       ...goodsreceivednotesDTO,
       incomingDetailsCreateDTOList: [...incomingDetailsCreateDTOList],
@@ -543,4 +503,4 @@ function InNoteForm() {
     </Grid>
   );
 }
-export default InNoteForm;
+export default OutNoteForm;

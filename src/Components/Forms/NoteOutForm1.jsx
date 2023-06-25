@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "../../CSS/scss/innotes.css";
 import "../../CSS/scss/styles.scss";
-const NoteOutForm = () => {
+const NoteOutForm1 = () => {
   const { userLogin } = useSelector((state) => state.userReducer);
   console.log(userLogin);
+
   const formik = useFormik({
     initialValues: {
       supplierCode: "",
@@ -140,4 +141,4 @@ const NoteOutForm = () => {
   );
 };
 
-export default NoteOutForm;
+export default NoteOutForm1;

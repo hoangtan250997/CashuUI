@@ -49,8 +49,8 @@ export const Login = () => {
             onChange={form.handleChange}
             onBlur={form.handleBlur}
           />
-          {form.errors.email && (
-            <p className="text-danger">{form.errors.email}</p>
+          {form.errors.username && (
+            <p className="text-danger">{form.errors.username}</p>
           )}
         </div>
         <div className="form-group passwordLogin">

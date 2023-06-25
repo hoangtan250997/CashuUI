@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {
+  IndexRoute,
   Routes,
   Route,
   BrowserRouter as Router,
@@ -25,7 +26,9 @@ createRoot(document.getElementById("root")).render(
     <HistoryRouter history={history}>
       <Routes>
         <Route path="/" element={<HomeTemplate />}>
-          <Route index path="dashboard" element={<DashBoard />} />
+          <Route path="/" element={<DashBoard />} />
+
+          <Route path="dashboard" element={<DashBoard />} />
           <Route path="innote" element={<Innote />} />
           <Route path="outnote" element={<Outnote />} />
           <Route path="analytics" element={<Analytics />} />
