@@ -2,7 +2,6 @@ import React from "react";
 import NoteInForm from "../../Components/Forms/NoteInForm";
 
 import InTable from "../../Components/InOutTable/InTable";
-
 // import { useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import Product from "../../Components/Product/product";
@@ -29,7 +28,6 @@ export default function Innote() {
       }}
     >
       <InTable />
-
       {/* <NoteInForm /> */}
     </div>
   );

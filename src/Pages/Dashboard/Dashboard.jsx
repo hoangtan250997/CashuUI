@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Card, Statistic, Typography } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
-import Widget from "../../Components/Charts/Widget";
-import RawChart from "../../Components/Charts/RawChart";
-import FGChart from "../../Components/Charts/FGChart";
-import OutgoingTable from "../../Components/Tables/OutgoingTable";
+import Widget from "../../Components/DashboardCharts/Widget";
+import RawChart from "../../Components/DashboardCharts/RawChart";
+import FGChart from "../../Components/DashboardCharts/FGChart";
+import OutgoingTable from "../../Components/DashboardCharts/OutgoingTable";
 
 const { Title } = Typography;
 

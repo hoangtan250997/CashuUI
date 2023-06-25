@@ -52,10 +52,10 @@ export default function InTable() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/goodsreceivednotes"
+        "http://localhost:8080/goodsdeliverynotes"
       );
       const productionData = response.data.sort((a, b) =>
-        b.incomingDate.localeCompare(a.incomingDate)
+        b.outgoingDate.localeCompare(a.outgoingDate)
       );
       setInData(response.data);
     } catch (error) {
@@ -99,14 +99,14 @@ export default function InTable() {
             style={{ fontSize: 16 }}
             align="center"
           >
-            {props.row.supplierName}
+            {props.row.customerName}
           </TableCell>
           <TableCell
             className={classes.cell}
             style={{ fontSize: 16 }}
             align="center"
           >
-            {props.row.incomingDate}
+            {props.row.outgoingDate}
           </TableCell>
           <TableCell
             className={classes.cell}
@@ -165,6 +165,17 @@ export default function InTable() {
                           fontWeight: "bold",
                           fontSize: 15,
                           border: "1px solid grey",
+                          width: 80,
+                        }}
+                        align="center"
+                      >
+                        Incoming Date
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          fontWeight: "bold",
+                          fontSize: 15,
+                          border: "1px solid grey",
                           width: 50,
                         }}
                         align="right"
@@ -180,7 +191,7 @@ export default function InTable() {
                         }}
                         align="center"
                       >
-                        Cost ($)
+                        Price ($)
                       </TableCell>
                       <TableCell
                         style={{
@@ -191,12 +202,12 @@ export default function InTable() {
                         }}
                         align="center"
                       >
-                        Expiration Date
+                        Discount (%)
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {props.row.incomingDetailsCreateDTOList.map((product) => (
+                    {props.row.outgoingDetailsCreateDTOList.map((product) => (
                       <TableRow key={product.id}>
                         <TableCell
                           align="left"
@@ -213,6 +224,14 @@ export default function InTable() {
                           {product.areaName}
                         </TableCell>
                         <TableCell
+                          align="center"
+                          style={{
+                            border: "1px solid grey",
+                          }}
+                        >
+                          {product.incomingDate}
+                        </TableCell>
+                        <TableCell
                           align="right"
                           style={{ border: "1px solid grey" }}
                         >
@@ -222,13 +241,13 @@ export default function InTable() {
                           align="center"
                           style={{ border: "1px solid grey" }}
                         >
-                          {product.cost}
+                          {product.price}
                         </TableCell>
                         <TableCell
                           align="center"
                           style={{ border: "1px solid grey" }}
                         >
-                          {product.expirationDate}
+                          {product.discount * 100}
                         </TableCell>
                       </TableRow>
                     ))}
@@ -261,13 +280,13 @@ export default function InTable() {
               style={{ fontWeight: "bold", fontSize: 23, color: "white" }}
               align="center"
             >
-              Supplier Name
+              Customer Name
             </TableCell>
             <TableCell
               style={{ fontWeight: "bold", fontSize: 23, color: "white" }}
               align="center"
             >
-              Received Date
+              Shipping Date
             </TableCell>
             <TableCell
               style={{ fontWeight: "bold", fontSize: 23, color: "white" }}

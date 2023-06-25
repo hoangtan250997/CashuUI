@@ -1,5 +1,6 @@
 import React from "react";
 import NoteOutForm from "../../Components/Forms/NoteOutForm";
+import OutTable from "../../Components/InOutTable/OutTable";
 // import { useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import Product from "../../Components/Product/product";
@@ -24,7 +25,8 @@ export default function Outnote() {
         textAlign: "center",
       }}
     >
-      <NoteOutForm />
+      <OutTable />
+      {/* <NoteOutForm /> */}
     </div>
   );
 }

@@ -145,19 +145,19 @@ const OutgoingTable = () => {
 
   const columns = [
     {
-      title: "No",
+      title: "No.",
       dataIndex: "no",
       key: "no",
       width: "5%",
-      align: "center",
-      render: (text, record, index) => (page - 1) * 10 + index + 1,
+      align: "right",
+      render: (text, record, index) => (page - 1) * 5 + index + 1,
     },
     {
       title: "Code",
       dataIndex: "gdnCode",
       key: "code",
       width: "10%",
-      align: "center",
+      align: "left",
       ...getColumnSearchProps("code"),
     },
     {
@@ -165,7 +165,7 @@ const OutgoingTable = () => {
       dataIndex: "customerName",
       key: "customer",
       width: "15%",
-      align: "center",
+      align: "left",
       ...getColumnSearchProps("customer"),
     },
     {
@@ -173,7 +173,7 @@ const OutgoingTable = () => {
       dataIndex: "customerEmail",
       key: "email",
       width: "15%",
-      align: "center",
+      align: "left",
       ...getColumnSearchProps("email"),
     },
 
@@ -182,7 +182,7 @@ const OutgoingTable = () => {
       dataIndex: "totalAmount",
       key: "amount",
       width: "10%",
-      align: "center",
+      align: "right",
       ...getColumnSearchProps("amount"),
       render: (text) => <span>{text.toLocaleString()}</span>,
     },
@@ -202,9 +202,9 @@ const OutgoingTable = () => {
       columns={columns}
       dataSource={outgoingData}
       pagination={{
-        pageSize: 10,
-        pageSizeOptions: ["10"],
-        defaultPageSize: 10,
+        pageSize: 5,
+        pageSizeOptions: ["5"],
+        defaultPageSize: 5,
         onChange(current) {
           setPage(current);
         },
