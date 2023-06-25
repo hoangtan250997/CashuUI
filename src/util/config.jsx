@@ -57,27 +57,44 @@ const http = axios.create({
   baseURL: "https://localhost:8080/",
   timeout: 3000,
 });
+
+axios.interceptors.request.use(
+  (config) => {
+    config.headers = {
+      ...config.headers,
+      Authorization: `Bearer ${getStore(ACCESS_TOKEN)}`,
+    };
+    return config;
+  },
+  (error) => {
+    console.log("Bi loi roi");
+    return Promise.reject(error);
+  }
+);
+// http.interceptors.request.use((config) => {
+//   console.log("config config");
+
+//   let userInfo = localStorage.getItem(USER_LOGIN);
+
+//   if (userInfo) {
+//     userInfo = JSON.parse(userInfo);
+
+//     config.headers.Authorization = `Bearer ${userInfo.token}`;
+
+//     config.headers["Roles"] = userInfo.roles;
+//   }
+//   return config;
+// });
+
 export const signIn = (data) => {
+  console.log("SignIn config");
+
   return request({
     url: "/auth/signin",
     method: "POST",
     data,
   });
 };
-
-// http.interceptors.request.use(
-//   (config) => {
-//     config.headers = {
-//       ...config.headers,
-//       // Authorization: `Bearer ${getStore(ACCESS_TOKEN)}`,
-//       Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ2Y2FzZXkiLCJpYXQiOjE2ODc2MjY0NzUsImV4cCI6MTY4NzY2OTY3NX0.wR6SJKWpIvP7O6HuWHqzjHQIS49xDIFaE4mr5bksz2Wf0SL63GU8REIST-MHA4FQzeh1mp2rUwSPZRfkzXHScQ`,
-//     };
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
 //Cấu hình cho tất cả các response api
 http.interceptors.response.use(
   (res) => {

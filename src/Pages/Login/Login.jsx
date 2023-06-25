@@ -3,7 +3,9 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { loginApi } from "../../redux/reducers/userReducer";
 import { useDispatch } from "react-redux";
+
 import { removeStore } from "../../util/config";
+import { history } from "../../index";
 export const Login = () => {
   const dispatch = useDispatch();
 
@@ -11,6 +13,7 @@ export const Login = () => {
     // const rmAsync = removeStore("userLogin");
     // dispatch(rmAsync);
     localStorage.removeItem("userLogin");
+    window.location.reload();
   };
   const form = useFormik({
     initialValues: {
@@ -68,11 +71,11 @@ export const Login = () => {
           <button className="btn btn-success mt-2 btnLogin" type="submit">
             LOGIN
           </button>
-          <button className="btn btn-success mt-2 btnLogin" onClick={remove}>
-            REMOVE
-          </button>
         </div>
       </form>
+      <button className="btn btn-success mt-2 btnLogin" onClick={remove}>
+        REMOVE
+      </button>
     </>
   );
 };

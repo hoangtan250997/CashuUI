@@ -30,30 +30,82 @@ import "../../CSS/scss/styles.scss";
 import { auto } from "@popperjs/core";
 import axios from "axios";
 import Grid from "@mui/material/Unstable_Grid2";
-
-// import Icon from "@ant-design/icons/lib/components/AntdIcon";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { format } from "date-fns";
+var options = {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+};
 
 function InNoteForm() {
-  const [chartData, setChartData] = useState([]);
+  //Supplier + Production + Area
+  const [supplierData, setsupplierData] = useState([]);
+  const [productionData, setproductionData] = useState([]);
+  const [areaData, setareaData] = useState([]);
+
+  //GET DATA FROM DB
   useEffect(() => {
     fetchData();
   }, []);
   const fetchData = async () => {
     try {
+      // Get suppliers list
       const response = await axios.get("http://localhost:8080/suppliers");
-      setChartData(response.data);
+      const sortedSupplierData = response.data.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      setsupplierData(sortedSupplierData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+    // Get product list
+
+    try {
+      const response = await axios.get("http://localhost:8080/products");
+      const productionData = response.data.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+
+      setproductionData(productionData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+    // Get area list
+
+    try {
+      const response = await axios.get("http://localhost:8080/warehouseareas");
+      const areaData = response.data.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+
+      setareaData(areaData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
+  //CREATE OBJECTS
+
   // Khởi tạo giá trị cho form
   //1
-
+  //Objects display for forms
   const [goodsreceivednotes, setgoodsreceivednotes] = useState({
     supplierCode: "",
-    note: "",
-    // incomingDetailsCreateDTOList: [],
+    imcomingDate: "",
+    record: "",
+  });
+  //Objects display for forms
+
+  const [goodsreceivednotesDTO, setgoodsreceivednotesDTO] = useState({
+    supplierCode: "",
+    imcomingDate: "",
+    record: "",
   });
 
   //2
@@ -66,14 +118,49 @@ function InNoteForm() {
   //1
   //Set giá trị cho form
   const handleChange = (event) => {
+    console.log("here1");
+
     const { name, value } = event.target;
 
-    setgoodsreceivednotes((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+    if (name === "supplierCode") {
+      const filteredData = supplierData.filter((item) => item.name === value);
+
+      setgoodsreceivednotes((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+
+      setgoodsreceivednotesDTO((prevState) => ({
+        ...prevState,
+        supplierCode: filteredData[0].code, // Replace with the desired value for imcomingDate
+      }));
+    } else {
+      setgoodsreceivednotes((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+
+      setgoodsreceivednotesDTO((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
   };
 
+  // Giá trị của date
+  const handleDateChange = (date) => {
+    // const formattedDate = format(date, "yyyy-MM-dd HH:mm:ss");
+    console.log("formattedDate ", date);
+    setgoodsreceivednotes((prevState) => ({
+      ...prevState,
+      imcomingDate: new Date(date).toLocaleDateString(), // Replace with the desired value for imcomingDate
+    }));
+
+    setgoodsreceivednotesDTO((prevState) => ({
+      ...prevState,
+      imcomingDate: date.toISOString(), // Replace with the desired value for imcomingDate
+    }));
+  };
   //2
   //+-
   const handleChangeInput = (id, event) => {
@@ -86,13 +173,17 @@ function InNoteForm() {
         return i;
       }
     );
+    console.log(
+      "newincomingDetailsCreateDTOList ",
+      newincomingDetailsCreateDTOList
+    );
     const updatedGoodsReceivedNotes = {
       ...goodsreceivednotes,
       incomingDetailsCreateDTOList: incomingDetailsCreateDTOList,
     };
-    setgoodsreceivednotes(updatedGoodsReceivedNotes);
-
     setincomingDetailsCreateDTOList(newincomingDetailsCreateDTOList);
+
+    setgoodsreceivednotes(updatedGoodsReceivedNotes);
 
     setgoodsreceivednotes((prevState) => ({
       ...prevState,
@@ -102,32 +193,89 @@ function InNoteForm() {
 
   //1+2
   // Tạo ra object cho form
-  const merge = (event) => {
-    const updatedGoodsReceivedNotes = {
-      ...goodsreceivednotes,
-      incomingDetailsCreateDTOList: incomingDetailsCreateDTOList,
-    };
-    setgoodsreceivednotes(updatedGoodsReceivedNotes);
-    // console.log("goodsreceivednotes", goodsreceivednotes);
-  };
+  // const merge = (event) => {
+  //   const updatedGoodsReceivedNotes = {
+  //     ...goodsreceivednotes,
+  //     incomingDetailsCreateDTOList: incomingDetailsCreateDTOList,
+  //   };
+
+  //   setgoodsreceivednotes(updatedGoodsReceivedNotes);
+  //   // const incomingDetailsCreateDTOList1 =(...incomingDetailsCreateDTOList);
+  //   const updatedGoodsReceivedNotesDTO = {
+  //     ...goodsreceivednotesDTO,
+  //     incomingDetailsCreateDTOList: [...incomingDetailsCreateDTOList],
+  //   };
+
+  //   setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
+  //
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(
-      "Tables",
-      goodsreceivednotes.incomingDetailsCreateDTOList[0].productCode
-    );
 
-    // console.log("incomingDetailsCreateDTOList", incomingDetailsCreateDTOList);
+    //merge
+    const mergeupdatedGoodsReceivedNotes = {
+      ...goodsreceivednotes,
+      incomingDetailsCreateDTOList: incomingDetailsCreateDTOList,
+    };
 
-    // axios
-    //   .post("http://localhost:8080/goodsreceivednotes/1", goodsreceivednotes)
-    //   .then((response) => {
-    //     console.log(response.data); // Xử lý phản hồi từ máy chủ Java
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
+    setgoodsreceivednotes(mergeupdatedGoodsReceivedNotes);
+    // const incomingDetailsCreateDTOList1 =(...incomingDetailsCreateDTOList);
+    const mergeupdatedGoodsReceivedNotesDTO = {
+      ...goodsreceivednotesDTO,
+      incomingDetailsCreateDTOList: [...incomingDetailsCreateDTOList],
+    };
+
+    setgoodsreceivednotesDTO(mergeupdatedGoodsReceivedNotesDTO);
+
+    console.log("goodsreceivednotes", goodsreceivednotes);
+    console.log("goodsreceivednotesDTO", goodsreceivednotesDTO);
+    //Convert
+    const resultMap = incomingDetailsCreateDTOList.map((item) => {
+      if (item.productCode !== "") {
+        const filteredProductionData = productionData.filter(
+          (item1) => item1.name === item.productCode
+        );
+
+        return {
+          ...item,
+          productCode: filteredProductionData[0].code,
+        };
+      }
+    });
+    const resultMap2 = resultMap.map((item) => {
+      if (item.areaId !== "") {
+        const filteredAreaData = areaData.filter(
+          (item1) => item1.name === item.areaId
+        );
+
+        return {
+          ...item,
+          areaId: filteredAreaData[0].id,
+        };
+      }
+    });
+    console.log("resultMap2", resultMap2);
+    // set convert to DTO object
+
+    const updatedGoodsReceivedNotesDTO = {
+      ...goodsreceivednotesDTO,
+      incomingDetailsCreateDTOList: resultMap2,
+    };
+
+    setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
+
+    console.log("goodsreceivednotes", goodsreceivednotes);
+    console.log("goodsreceivednotesDTO", goodsreceivednotesDTO);
+    axios
+      .post("http://localhost:8080/goodsreceivednotes", goodsreceivednotesDTO)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log("Lỗi");
+        console.log(error);
+      });
   };
 
   //2
@@ -183,7 +331,7 @@ function InNoteForm() {
       <Grid xs={6}>
         <Container className="inNoteForm" style={{ height: "auto" }}>
           <Typography className="title">IN NOTE FORM</Typography>
-          <form onSubmit={merge}>
+          <form onSubmit={handleSubmit}>
             {/* Nút Supplier Code */}
 
             <Box
@@ -194,31 +342,58 @@ function InNoteForm() {
                 marginBottom: 1,
               }}
             >
-              <InputLabel id="supplier-select-label">Supplier Code</InputLabel>
-              <Select
-                fullWidth
-                id="fullWidth"
-                labelId="supplier-select-label"
-                name="supplierCode"
-                label="Supplier Code"
-                value={goodsreceivednotes.supplierCode}
-                onChange={handleChange}
-              >
-                {chartData.map((item) => (
-                  <MenuItem value={item.name}>{item.name}</MenuItem>
-                ))}
-              </Select>
-
+              <Grid container style={{ width: "100%" }}>
+                <Grid xs={8}>
+                  <InputLabel id="supplier-select-label" className="inputLable">
+                    Supplier Code
+                  </InputLabel>
+                  <Select
+                    fullWidth
+                    id="fullWidth"
+                    labelId="supplier-select-label"
+                    name="supplierCode"
+                    label="Supplier Code"
+                    value={goodsreceivednotes.supplierCode}
+                    onChange={handleChange}
+                  >
+                    {supplierData.map((item) => (
+                      <MenuItem value={item.name}>{item.name}</MenuItem>
+                    ))}
+                  </Select>
+                </Grid>
+                <Grid xs={4}>
+                  <div
+                    style={{
+                      marginLeft: "30px",
+                      alignItems: "right",
+                    }}
+                  >
+                    <InputLabel
+                      id="supplier-select-label"
+                      className="inputLable"
+                    >
+                      Date
+                    </InputLabel>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        className="imcomingDate"
+                        onChange={handleDateChange}
+                      />
+                    </LocalizationProvider>
+                  </div>
+                </Grid>
+              </Grid>
               {/* Nút Note */}
-              <InputLabel id="note-select-label">Note (Optional)</InputLabel>
+              <InputLabel id="note-select-label" className="inputLable">
+                Note (Optional)
+              </InputLabel>
 
               <TextField
-                id="note"
-                // label="Note (Optional)"
-                name="note"
+                id="record"
+                name="record"
                 variant="outlined"
                 multiline
-                value={goodsreceivednotes.note}
+                value={goodsreceivednotes.record}
                 // onChange={(event) => handleChangeInput(inputFields[0].id, event)}
                 onChange={handleChange}
               />
@@ -243,8 +418,11 @@ function InNoteForm() {
                     className="incomingDetailsCreateDTOList"
                     id="productCodeForm"
                   >
-                    <InputLabel style={{ margin: "0" }}>
-                      Product Code
+                    <InputLabel
+                      style={{ margin: "0" }}
+                      className="incomingDetailsCreateDTOList"
+                    >
+                      Product Name
                     </InputLabel>
                     <Select
                       labelId="productCode"
@@ -256,12 +434,9 @@ function InNoteForm() {
                         handleChangeInput(incomingDetailsCreateDTO.id, event)
                       }
                     >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value="W180">W180</MenuItem>
-                      <MenuItem value="W210">W210</MenuItem>
-                      <MenuItem value="W240">W240</MenuItem>
+                      {productionData.map((item) => (
+                        <MenuItem value={item.name}>{item.name}</MenuItem>
+                      ))}
                     </Select>
                   </FormControl>
                   {/* Amount  */}
@@ -280,7 +455,8 @@ function InNoteForm() {
                   <TextField
                     className="incomingDetailsCreateDTOList"
                     name="cost"
-                    label="Cost"
+                    id="cost"
+                    label="Cost ($)"
                     value={incomingDetailsCreateDTO.cost}
                     multiline
                     onChange={(event) =>
@@ -303,12 +479,9 @@ function InNoteForm() {
                         handleChangeInput(incomingDetailsCreateDTO.id, event)
                       }
                     >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value={17}>17</MenuItem>
-                      <MenuItem value={18}>18</MenuItem>
-                      <MenuItem value={19}>19</MenuItem>
+                      {areaData.map((item) => (
+                        <MenuItem value={item.name}>{item.name}</MenuItem>
+                      ))}
                     </Select>
                   </FormControl>
                   {/* Button */}

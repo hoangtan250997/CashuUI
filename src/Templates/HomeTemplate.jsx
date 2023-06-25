@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "../Components/Navbar/Navbar";
 import Footer from "../Components/FooterHome/FooterHome";
 import HeaderDashboard from "../Components/Header/HeaderHome";
+import DashBoard from "../Pages/Dashboard/Dashboard";
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Login } from "../Pages/Login/Login";

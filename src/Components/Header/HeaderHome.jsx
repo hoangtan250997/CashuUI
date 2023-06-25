@@ -35,13 +35,15 @@ const HeaderDashboard = () => {
 
       <div
         style={{
-          flex: 0.3,
+          flex: 0.4,
           textAlign: "center",
           color: "white",
           fontWeight: "1000",
         }}
       >
-        <p style={{ backgroundColor: "grey" }}>Hello! {userLogin.username}</p>
+        <p style={{ backgroundColor: "grey", borderRadius: "10px" }}>
+          Hello! {userLogin.employeeName}
+        </p>
       </div>
 
       <div style={{ flex: 0.2, textAlign: "right" }}>

@@ -8,6 +8,9 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useDispatch, useSelector } from "react-redux";
 
+//Styles
+import "../Tables/InNoteTable2.scss";
+
 export default function InNoteTable2(props) {
   const { userLogin } = useSelector((state) => state.userReducer);
   if (userLogin === null) {
@@ -25,9 +28,6 @@ export default function InNoteTable2(props) {
   const { goodsreceivednotes } = props;
 
   console.log("Tables", goodsreceivednotes);
-  function ccyFormat(num) {
-    return `${num.toFixed(2)}`;
-  }
 
   //Tự động tạo hàng mới
   function createRow(desc, qty, unit, price) {
@@ -58,7 +58,11 @@ export default function InNoteTable2(props) {
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="spanning table">
+      <Table
+        sx={{ minWidth: 700 }}
+        aria-label="spanning table"
+        className="InnoteTable"
+      >
         <TableHead>
           <TableRow>
             <TableCell
@@ -75,7 +79,7 @@ export default function InNoteTable2(props) {
             </TableCell>
 
             <TableCell align="left" colSpan={1} style={{ fontWeight: "600" }}>
-              Date: {currentDate}
+              Date: {goodsreceivednotes.imcomingDate}
             </TableCell>
             <TableCell align="left" colSpan={2} style={{ fontWeight: "600" }}>
               Staff: {userLogin.username}
@@ -84,13 +88,13 @@ export default function InNoteTable2(props) {
           <TableRow>
             <TableCell align="left" colSpan={4} style={{ fontStyle: "italic" }}>
               Note: {""}
-              {goodsreceivednotes.note}
+              {goodsreceivednotes.record}
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Production Code</TableCell>
             <TableCell align="left">Amount(kg)</TableCell>
-            <TableCell align="left">Cost</TableCell>
+            <TableCell align="left">Cost ($)</TableCell>
             <TableCell align="left">Area</TableCell>
           </TableRow>
         </TableHead>

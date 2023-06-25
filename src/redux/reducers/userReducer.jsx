@@ -50,7 +50,7 @@ export const loginApi = (userLogin) => {
     //Gọi axios lấy dữ liệu api từ token
     //Gọi api getprofile
     alert("Dang nhap thanh cong!");
-    // history.push("/dashboard");
+    history.push("/dashboard");
     // window.location.href = "/dashboard";
 
     //HOANG
