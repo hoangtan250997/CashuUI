@@ -26,7 +26,7 @@ function OutNoteForm() {
   }, []);
   const fetchData = async () => {
     try {
-      // Get suppliers list
+      // Get customers list
       const response = await axios.get("http://localhost:8080/customers");
       const sortedcustomerData = response.data.sort((a, b) =>
         a.name.localeCompare(b.name)
@@ -67,9 +67,9 @@ function OutNoteForm() {
 
   //2
   //+-
-  const [incomingDetailsCreateDTOList, setincomingDetailsCreateDTOList] =
+  const [outgoingDetailsCreateDTOList, setoutgoingDetailsCreateDTOList] =
     useState([
-      { id: uuidv4(), productCode: "", amount: "", price: "", discount: "" },
+      { id: uuidv4(), productId: "", amount: "", price: "", discount: "" },
     ]);
 
   //1
@@ -89,7 +89,7 @@ function OutNoteForm() {
 
       setgoodsreceivednotesDTO((prevState) => ({
         ...prevState,
-        supplierCode: filteredData[0].code, // Replace with the desired value for imcomingDate
+        customerCode: filteredData[0].code, // Replace with the desired value for imcomingDate
       }));
     } else {
       setgoodsreceivednotes((prevFormData) => ({
@@ -107,7 +107,7 @@ function OutNoteForm() {
   //2
   //+-
   const handleChangeInput = (id, event) => {
-    const newincomingDetailsCreateDTOList = incomingDetailsCreateDTOList.map(
+    const newoutgoingDetailsCreateDTOList = outgoingDetailsCreateDTOList.map(
       (i) => {
         if (id === i.id) {
           i[event.target.name] = event.target.value;
@@ -117,20 +117,20 @@ function OutNoteForm() {
       }
     );
     console.log(
-      "newincomingDetailsCreateDTOList ",
-      newincomingDetailsCreateDTOList
+      "newoutgoingDetailsCreateDTOList ",
+      newoutgoingDetailsCreateDTOList
     );
     const updatedGoodsReceivedNotes = {
       ...goodsreceivednotes,
-      incomingDetailsCreateDTOList: incomingDetailsCreateDTOList,
+      outgoingDetailsCreateDTOList: outgoingDetailsCreateDTOList,
     };
-    setincomingDetailsCreateDTOList(newincomingDetailsCreateDTOList);
+    setoutgoingDetailsCreateDTOList(newoutgoingDetailsCreateDTOList);
 
     setgoodsreceivednotes(updatedGoodsReceivedNotes);
 
     setgoodsreceivednotes((prevState) => ({
       ...prevState,
-      incomingDetailsCreateDTOList: [...incomingDetailsCreateDTOList],
+      outgoingDetailsCreateDTOList: [...outgoingDetailsCreateDTOList],
     }));
   };
 
@@ -140,14 +140,14 @@ function OutNoteForm() {
     //merge
     const mergeupdatedGoodsReceivedNotes = {
       ...goodsreceivednotes,
-      incomingDetailsCreateDTOList: incomingDetailsCreateDTOList,
+      outgoingDetailsCreateDTOList: outgoingDetailsCreateDTOList,
     };
 
     setgoodsreceivednotes(mergeupdatedGoodsReceivedNotes);
-    // const incomingDetailsCreateDTOList1 =(...incomingDetailsCreateDTOList);
+    // const outgoingDetailsCreateDTOList1 =(...outgoingDetailsCreateDTOList);
     const mergeupdatedGoodsReceivedNotesDTO = {
       ...goodsreceivednotesDTO,
-      incomingDetailsCreateDTOList: [...incomingDetailsCreateDTOList],
+      outgoingDetailsCreateDTOList: [...outgoingDetailsCreateDTOList],
     };
 
     setgoodsreceivednotesDTO(mergeupdatedGoodsReceivedNotesDTO);
@@ -155,15 +155,15 @@ function OutNoteForm() {
     console.log("goodsreceivednotes", goodsreceivednotes);
     console.log("goodsreceivednotesDTO", goodsreceivednotesDTO);
     //Convert
-    const resultMap = incomingDetailsCreateDTOList.map((item) => {
-      if (item.productCode !== "") {
+    const resultMap = outgoingDetailsCreateDTOList.map((item) => {
+      if (item.productId !== "") {
         const filteredProductionData = productionData.filter(
-          (item1) => item1.name === item.productCode
+          (item1) => item1.name === item.productId
         );
-
+        console.log("filteredProductionData", filteredProductionData);
         return {
           ...item,
-          productCode: filteredProductionData[0].code,
+          productId: filteredProductionData[0].id,
         };
       }
     });
@@ -173,7 +173,7 @@ function OutNoteForm() {
 
     const updatedGoodsReceivedNotesDTO = {
       ...goodsreceivednotesDTO,
-      incomingDetailsCreateDTOList: resultMap,
+      outgoingDetailsCreateDTOList: resultMap,
     };
     setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
     setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
@@ -182,59 +182,50 @@ function OutNoteForm() {
 
     console.log("goodsreceivednotes", goodsreceivednotes);
     console.log("goodsreceivednotesDTO", goodsreceivednotesDTO);
-    // axios
-    //   .post("http://localhost:8080/goodsreceivednotes", goodsreceivednotesDTO)
-    //   .then(function (response) {
-    //     console.log(response);
+    axios
+      .post("http://localhost:8080/goodsdeliverynotes", goodsreceivednotesDTO)
+      .then(function (response) {
+        console.log(response);
 
-    //     alert("Create sucessfull!!!");
-    //   })
-    //   .catch(function (error) {
-    //     console.log("Lỗi");
-    //     console.log(error);
-    //   });
+        alert("Create sucessfull!!!");
+      })
+      .catch(function (error) {
+        console.log("Lỗi");
+        console.log(error);
+      });
   };
 
   //2
   //Option của thẻ Product code & Area
 
-  const [productCode, setproductCode] = React.useState("");
+  const [productId, setproductId] = React.useState("");
   const [area, setArea] = React.useState("");
-
-  // const changeProductCode = (event) => {
-  //   console.log("Here");
-  //   setproductCode(event.target.value);
-  // };
-
-  // const changeArea = (event) => {
-  //   setArea(event.target.value);
-  // };
 
   // Dấu +
 
   const handleAddFields = () => {
-    setincomingDetailsCreateDTOList([
-      ...incomingDetailsCreateDTOList,
+    setoutgoingDetailsCreateDTOList([
+      ...outgoingDetailsCreateDTOList,
       { id: uuidv4(), amount: "", price: "", areaId: "" },
     ]);
     const updatedGoodsReceivedNotes = {
       ...goodsreceivednotes,
-      incomingDetailsCreateDTOList: incomingDetailsCreateDTOList,
+      outgoingDetailsCreateDTOList: outgoingDetailsCreateDTOList,
     };
-    console.log("size InNoteForm: ", incomingDetailsCreateDTOList.length);
+    console.log("size InNoteForm: ", outgoingDetailsCreateDTOList.length);
   };
   // Dấu -
 
   const handleRemoveFields = (id) => {
-    const values = [...incomingDetailsCreateDTOList];
+    const values = [...outgoingDetailsCreateDTOList];
     values.splice(
       values.findIndex((value) => value.id === id),
       1
     );
-    setincomingDetailsCreateDTOList(values);
+    setoutgoingDetailsCreateDTOList(values);
     const updatedGoodsReceivedNotes = {
       ...goodsreceivednotes,
-      incomingDetailsCreateDTOList: incomingDetailsCreateDTOList,
+      outgoingDetailsCreateDTOList: outgoingDetailsCreateDTOList,
     };
     setgoodsreceivednotes(updatedGoodsReceivedNotes);
   };
@@ -245,7 +236,7 @@ function OutNoteForm() {
         <Container className="inNoteForm" style={{ height: "auto" }}>
           <Typography className="title">OUT NOTE FORM</Typography>
           <form onSubmit={handleSubmit}>
-            {/* Nút Supplier Code */}
+            {/* Nút customer Code */}
 
             <Box
               sx={{
@@ -257,17 +248,17 @@ function OutNoteForm() {
             >
               {/* <Grid container style={{ width: "100%" }}> */}
               {/* <Grid xs={8}> */}
-              <InputLabel id="supplier-select-label" className="inputLable">
+              <InputLabel id="customer-select-label" className="inputLable">
                 Customer Name{" "}
               </InputLabel>
               <Select
                 fullWidth
                 id="fullWidth"
-                labelId="supplier-select-label"
+                labelId="customer-select-label"
                 name="customerCode"
                 label="Customer Code"
                 required={true}
-                value={goodsreceivednotes.supplierCode}
+                value={goodsreceivednotes.customerCode}
                 onChange={handleChange}
               >
                 {customerData.map((item) => (
@@ -303,12 +294,12 @@ function OutNoteForm() {
                 // columnGap: 3,
               }}
             >
-              {incomingDetailsCreateDTOList.map((incomingDetailsCreateDTO) => (
+              {outgoingDetailsCreateDTOList.map((incomingDetailsCreateDTO) => (
                 <div key={incomingDetailsCreateDTO.id}>
                   {/* Production Code */}
                   <FormControl
-                    className="incomingDetailsCreateDTOList"
-                    id="productCodeForm"
+                    className="outgoingDetailsCreateDTOList"
+                    id="productIdForm"
                   >
                     {/* <InputLabel
                       id="production-select-lable"
@@ -321,9 +312,9 @@ function OutNoteForm() {
                       variant="outlined"
                       required
                       // labelId="production-select-lable"
-                      id="productCode"
-                      name="productCode"
-                      value={incomingDetailsCreateDTO.id.productCode}
+                      id="productId"
+                      name="productId"
+                      value={incomingDetailsCreateDTO.id.productId}
                       onChange={(event) =>
                         handleChangeInput(incomingDetailsCreateDTO.id, event)
                       }
@@ -348,7 +339,7 @@ function OutNoteForm() {
                   </FormControl>
                   {/* Amount  */}
                   <FormControl
-                    className="incomingDetailsCreateDTOList"
+                    className="outgoingDetailsCreateDTOList"
                     id="amountCodeForm"
                   >
                     <TextField
@@ -373,7 +364,7 @@ function OutNoteForm() {
                   {/* price */}
 
                   <TextField
-                    className="incomingDetailsCreateDTOList"
+                    className="outgoingDetailsCreateDTOList"
                     required
                     id="price"
                     // id="standard-number"
@@ -392,7 +383,7 @@ function OutNoteForm() {
                   />
                   {/* Discount */}
                   <TextField
-                    className="incomingDetailsCreateDTOList"
+                    className="outgoingDetailsCreateDTOList"
                     required
                     id="discount"
                     // id="standard-number"
@@ -412,7 +403,7 @@ function OutNoteForm() {
 
                   {/* Button */}
                   <IconButton
-                    disabled={incomingDetailsCreateDTOList.length === 1}
+                    disabled={outgoingDetailsCreateDTOList.length === 1}
                     onClick={() =>
                       handleRemoveFields(incomingDetailsCreateDTO.id)
                     }

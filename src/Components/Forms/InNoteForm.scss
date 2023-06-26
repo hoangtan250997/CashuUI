@@ -5,6 +5,7 @@
 }
 .inNoteForm {
   // background: rgba(220, 200, 200, 0.95);
+  height: 100vh;
   background-color: rgba($color: #c99283, $alpha: 1);
   box-shadow: 0px 0px 5px 2px rgb(173, 159, 168);
   border-radius: 20px;
@@ -48,11 +49,6 @@ legend {
 // .filled label {
 //   margin-top: 3px;
 // }
-
-// Đổi màu input
-.filled {
-  background-color: rgb(220, 200, 200) !important;
-}
 
 .incomingDetailsCreateDTOList {
   width: 8rem;

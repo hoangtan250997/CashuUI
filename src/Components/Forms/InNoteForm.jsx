@@ -1,11 +1,3 @@
-import { useFormik } from "formik";
-import * as yup from "yup";
-// import { Card } from "antd";
-// // import Icon from "@ant-design/icons/lib/components/AntdIcon";
-// // import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
-// import { IconName } from "react-icons/ai";
-// import { HiMinus, HiPlus } from 'react-icons/hi';
-
 import React, { useState, useEffect } from "react";
 import { Container, FormControl } from "@mui/material/";
 import TextField from "@mui/material/TextField";
@@ -25,9 +17,10 @@ import { makeStyles } from "@mui/styles/";
 import { v4 as uuidv4 } from "uuid";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InNoteTable2 from "../Tables/InNoteTable2";
-import "../../CSS/scss/innotes.css";
-import "../../CSS/scss/styles.scss";
-import "../../Components/Forms/InNoteForm.scss";
+import { history } from "../../index";
+// import "../../CSS/scss/innotes.css";
+// import "../../CSS/scss/styles.scss";
+// import "../../Components/Forms/InNoteForm.scss";
 import { auto } from "@popperjs/core";
 import axios from "axios";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -38,15 +31,6 @@ import { format } from "date-fns";
 import dayjs from "dayjs";
 
 const today = dayjs();
-
-var options = {
-  year: "numeric",
-  month: "2-digit",
-  day: "2-digit",
-  hour: "2-digit",
-  minute: "2-digit",
-  second: "2-digit",
-};
 
 function InNoteForm() {
   //Supplier + Production + Area
@@ -196,25 +180,6 @@ function InNoteForm() {
     }));
   };
 
-  //1+2
-  // Tạo ra object cho form
-  // const merge = (event) => {
-  //   const updatedGoodsReceivedNotes = {
-  //     ...goodsreceivednotes,
-  //     incomingDetailsCreateDTOList: incomingDetailsCreateDTOList,
-  //   };
-
-  //   setgoodsreceivednotes(updatedGoodsReceivedNotes);
-  //   // const incomingDetailsCreateDTOList1 =(...incomingDetailsCreateDTOList);
-  //   const updatedGoodsReceivedNotesDTO = {
-  //     ...goodsreceivednotesDTO,
-  //     incomingDetailsCreateDTOList: [...incomingDetailsCreateDTOList],
-  //   };
-
-  //   setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
-  //
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -225,7 +190,6 @@ function InNoteForm() {
     };
 
     setgoodsreceivednotes(mergeupdatedGoodsReceivedNotes);
-    // const incomingDetailsCreateDTOList1 =(...incomingDetailsCreateDTOList);
     const mergeupdatedGoodsReceivedNotesDTO = {
       ...goodsreceivednotesDTO,
       incomingDetailsCreateDTOList: [...incomingDetailsCreateDTOList],
@@ -280,6 +244,7 @@ function InNoteForm() {
         console.log(response);
 
         alert("Create sucessfull!!!");
+        history.push("/innote");
       })
       .catch(function (error) {
         console.log("Lỗi");

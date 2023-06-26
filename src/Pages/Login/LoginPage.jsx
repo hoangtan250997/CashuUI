@@ -8,7 +8,7 @@ export default function LoginPage() {
   return (
     <Grid container spacing={2}>
       <Grid item xs={5}></Grid>
-      <Grid item xs={2}>
+      <Grid item xs={2} id="logincol">
         <Login id="logincomp" />
       </Grid>
       <Grid item xs={5}></Grid>

@@ -51,3 +51,6 @@ label {
   font-family: "Poppins", sans-serif;
   height: 5rem;
 }
+.MuiGrid2-root {
+  background-color: red;
+}

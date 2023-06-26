@@ -4,10 +4,9 @@ import Grid from "@mui/material/Unstable_Grid2";
 import "../../Components/Forms/InNoteForm.scss";
 import InNoteTable from "../../Components/Tables/InNoteTable";
 import InNoteTable2 from "../../Components/Tables/InNoteTable2";
-import InTable from "../../Components/InNoteTable/InTable";
-// import HeaderInnote from "../../Components/Header/HeaderInote";
+
 import HeaderHome from "../../Components/Header/HeaderHome";
-export default function Innote() {
+export default function InnoteFormPage() {
   return (
     <div
       style={{
@@ -18,7 +17,7 @@ export default function Innote() {
     >
       <HeaderHome />
       <div style={{ flex: 1, marginTop: 10 }}>
-        <InTable />
+        <InNoteForm />
       </div>
     </div>
   );

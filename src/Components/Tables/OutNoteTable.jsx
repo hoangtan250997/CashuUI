@@ -20,11 +20,9 @@ export default function OutNoteTable(props) {
     // Xử lý khi user không phải là null
     console.log("User tồn tại.", userLogin);
   }
-  const dispatch = useDispatch();
 
   const currentDate = new Date().toLocaleDateString();
 
-  const TAX_RATE = 0.07;
   const { goodsreceivednotes } = props;
 
   console.log("Tables", goodsreceivednotes);
@@ -42,15 +40,15 @@ export default function OutNoteTable(props) {
   const rows = [];
   if (
     goodsreceivednotes &&
-    goodsreceivednotes.incomingDetailsCreateDTOList &&
-    goodsreceivednotes.incomingDetailsCreateDTOList.length !== 0
+    goodsreceivednotes.outgoingDetailsCreateDTOList &&
+    goodsreceivednotes.outgoingDetailsCreateDTOList.length !== 0
   ) {
-    goodsreceivednotes.incomingDetailsCreateDTOList.forEach((item) => {
+    goodsreceivednotes.outgoingDetailsCreateDTOList.forEach((item) => {
       const row = createRow(
-        item.productCode,
+        item.productId,
         item.amount,
-        item.cost,
-        item.areaId
+        item.price,
+        item.discount
       );
       rows.push(row);
     });
@@ -75,7 +73,7 @@ export default function OutNoteTable(props) {
           </TableRow>
           <TableRow>
             <TableCell align="left" colSpan={1} style={{ fontWeight: "600" }}>
-              Supplier : {goodsreceivednotes.supplierCode}
+              Customer : {goodsreceivednotes.customerCode}
             </TableCell>
 
             <TableCell align="left" colSpan={1} style={{ fontWeight: "600" }}>
@@ -94,8 +92,8 @@ export default function OutNoteTable(props) {
           <TableRow>
             <TableCell>Production Code</TableCell>
             <TableCell align="left">Amount(kg)</TableCell>
-            <TableCell align="left">Cost ($)</TableCell>
-            <TableCell align="left">Area</TableCell>
+            <TableCell align="left">Price ($)</TableCell>
+            <TableCell align="left">Discount</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
