@@ -14,7 +14,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { makeStyles } from "@mui/styles/";
 import { TablePagination } from "@mui/material";
-import { GridFilterOperator } from "@mui/x-data-grid";
+// import { GridFilterOperator } from "@mui/x-data-grid";
 
 import axios from "axios";
 import "../../CSS/scss/styles.scss";
