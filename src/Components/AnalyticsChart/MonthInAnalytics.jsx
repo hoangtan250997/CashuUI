@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { AgChartsReact } from 'ag-charts-react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { AgChartsReact } from "ag-charts-react";
+import axios from "axios";
 
 export default function MonthInAnalytics() {
   const [chartData, setChartData] = useState([]);
@@ -31,22 +31,32 @@ export default function MonthInAnalytics() {
         text: "INCOMING AMOUNT",
       },
       subtitle: {
-        text: 'In month (KGs)',
+        text: "In KGs",
       },
       data,
       series: [
         {
-          type: 'column',
-          xKey: 'productcode',
-          yKey: 'amount',
-          fill: '#CD7574',
+          type: "column",
+          xKey: "productcode",
+          yKey: "amount",
+          fill: "#CD7574",
           highlightStyle: {
             item: {
-              fill: '#F1A7B4',
-              stroke: '#F1A7B4',
-            }
-           
-          }
+              fill: "#F1A7B4",
+              stroke: "#F1A7B4",
+            },
+          },
+        },
+      ],
+      yAxes: [
+        {
+          type: "number",
+          tick: {
+            count: 1000, // Adjust the number of ticks displayed on the y-axis
+          },
+          label: {
+            format: "{amount}", // Use custom formatting for the y-axis labels if needed
+          },
         },
       ],
     };

@@ -64,6 +64,9 @@ html {
   &:not(:last-child) {
     margin-right: 32px;
   }
+  #columnDashboard1 {
+    align-items: center;
+  }
 }
 
 .rowDashboard:first-child {
@@ -73,6 +76,9 @@ html {
 .ant-card-head {
   padding: 10px !important;
   text-align: center;
+  h3 {
+    margin: 0;
+  }
 }
 .columnDashboard:first-child .ant-card-body {
   padding: 10px;
