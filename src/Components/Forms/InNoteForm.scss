@@ -55,13 +55,15 @@ legend {
 }
 
 .incomingDetailsCreateDTOList {
-  width: 7.3rem;
+  width: 8rem;
   margin-right: 0.6rem !important;
   label {
     font-family: "Poppins", sans-serif !important;
     margin: 0;
-
     font-size: 0.8rem !important;
+    padding-bottom: 100px;
+  }
+  #cost {
   }
 }
 
@@ -73,14 +75,12 @@ legend {
 }
 
 #productCodeForm {
-  width: 280px;
+  width: 250px;
   #productCode {
     font-size: small;
   }
 }
-#amount {
-  font-size: small;
-}
+
 #cost {
   font-size: small;
 }
@@ -89,4 +89,16 @@ legend {
 }
 #areaFormControl {
   width: 130px;
+}
+
+.MuiSelect-select {
+  background-color: rgb(228, 216, 216) !important;
+}
+.MuiInputBase-root {
+  background-color: rgb(228, 216, 216) !important;
+}
+
+.MuiInputLabel-shrink {
+  font-weight: bold !important;
+  font-size: larger !important;
 }

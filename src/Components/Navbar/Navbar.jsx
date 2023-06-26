@@ -24,6 +24,7 @@ function Navbar() {
 
   return (
     <div
+      className="navbar"
       style={{
         backgroundColor: "rgba(177, 120, 84,0.9)",
         borderRadius: "20px",
@@ -50,14 +51,13 @@ function Navbar() {
         }}
       />
       <Menu
+        className="menuItem"
         style={{
           backgroundColor: "rgba(0, 0, 0, 0)",
           fontWeight: "500",
           color: "white",
           marginTop: "100",
         }}
-        // defaultSelectedKeys={["1"]}
-        // defaultOpenKeys={["sub1"]}
         mode="inline"
         inlineCollapsed={collapsed}
       >

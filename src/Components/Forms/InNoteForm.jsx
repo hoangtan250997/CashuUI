@@ -27,6 +27,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InNoteTable2 from "../Tables/InNoteTable2";
 import "../../CSS/scss/innotes.css";
 import "../../CSS/scss/styles.scss";
+import "../../Components/Forms/InNoteForm.scss";
 import { auto } from "@popperjs/core";
 import axios from "axios";
 import Grid from "@mui/material/Unstable_Grid2";

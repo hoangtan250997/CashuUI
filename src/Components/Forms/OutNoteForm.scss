@@ -50,43 +50,34 @@ legend {
 // }
 
 // Đổi màu input
-.filled {
-  background-color: rgb(220, 200, 200) !important;
-}
 
 .incomingDetailsCreateDTOList {
-  width: 7.3rem;
+  width: 7rem;
   margin-right: 0.6rem !important;
   label {
     font-family: "Poppins", sans-serif !important;
     margin: 0;
-
-    font-size: 0.8rem !important;
+    padding-bottom: 100px;
   }
 }
 
-#areaFormControl {
-  margin-right: 1rem !important;
+#productCodeForm {
+  width: 15rem;
+  #productCode {
+    font-size: 1rem;
+  }
+}
+
+#amountCodeForm {
+  width: 10rem;
 }
 #note {
   justify-content: end;
 }
 
-#productCodeForm {
-  width: 280px;
-  #productCode {
-    font-size: small;
-  }
+.MuiSelect-select {
+  background-color: rgb(228, 216, 216) !important;
 }
-#amount {
-  font-size: small;
-}
-#cost {
-  font-size: small;
-}
-#areaId {
-  font-size: small;
-}
-#areaFormControl {
-  width: 130px;
+.MuiInputBase-root {
+  background-color: rgb(228, 216, 216) !important;
 }

@@ -7,12 +7,7 @@ import "../../Components/Forms/InNoteForm.scss";
 export default function Innote() {
   return (
     <Grid container spacing={1}>
-      {/* <Grid xs={6}> */}
       <OutNoteForm />
-      {/* </Grid> */}
-      {/* <Grid xs={6}>
-        <InNoteTable2 />
-      </Grid> */}
     </Grid>
   );
 }

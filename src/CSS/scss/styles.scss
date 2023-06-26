@@ -8,6 +8,10 @@
 html {
   font-family: "Poppins", sans-serif !important;
 }
+
+.navbar {
+  height: 99vh !important;
+}
 .logo-container {
   display: flex;
   justify-content: center;
@@ -57,6 +61,19 @@ html {
   font-family: "Poppins", sans-serif;
   color: rgb(63, 59, 56) !important;
   font-weight: 800;
+}
+
+//navbar
+.ant-menu {
+  border-right: 0px !important;
+  font-size: small !important;
+}
+.ant-menu {
+  margin-bottom: 0px !important;
+  height: 58vh !important;
+  .ant-menu-item {
+    font-size: 0.85rem;
+  }
 }
 
 // Dashboard
