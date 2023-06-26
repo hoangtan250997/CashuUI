@@ -82,7 +82,14 @@ html {
     margin-right: 32px;
   }
 }
+h3 {
+  margin: 0;
+}
 
+.ant-card-body {
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+}
 .rowDashboard:first-child {
   margin-bottom: 10px;
 }
