@@ -5,16 +5,20 @@ import "../../Components/Forms/InNoteForm.scss";
 import InNoteTable from "../../Components/Tables/InNoteTable";
 import InNoteTable2 from "../../Components/Tables/InNoteTable2";
 import InTable from "../../Components/InNoteTable/InTable";
-
+import HeaderDashboard from "../../Components/Header/HeaderHome";
 export default function Innote() {
   return (
-    <Grid container spacing={1}>
-      {/* <Grid xs={6}> */}
-      <InTable />
-      {/* </Grid> */}
-      {/* <Grid xs={6}>
-        <InNoteTable2 />
-      </Grid> */}
-    </Grid>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+      }}
+    >
+      <HeaderDashboard />
+      <div style={{ flex: 1, marginTop: 10 }}>
+        <InTable />
+      </div>
+    </div>
   );
 }

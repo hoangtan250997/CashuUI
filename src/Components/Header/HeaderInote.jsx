@@ -22,7 +22,7 @@ const HeaderDashboard = () => {
       }}
     >
       <div style={{ flex: 1 }}></div>
-      <p>IN NOTES</p>
+      <p style={{ background: "white" }}>IN NOTES</p>
       <div style={{ flex: 1 }}></div>
 
       <div

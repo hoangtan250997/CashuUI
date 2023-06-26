@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function InTable() {
+export default function OutTable() {
   const classes = useStyles();
 
   const [page, setPage] = useState(0);

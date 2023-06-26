@@ -5,7 +5,7 @@ import HeaderDashboard from "../Components/Header/HeaderHome";
 import DashBoard from "../Pages/Dashboard/Dashboard";
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Login } from "../Pages/Login/Login";
+import LoginPage from "../Pages/Login/LoginPage";
 import "../CSS/scss/styles.css";
 
 export const HomeTemplate = () => {
@@ -32,7 +32,7 @@ export const HomeTemplate = () => {
             // gap: "20px",
           }}
         >
-          <HeaderDashboard />
+          {/* <HeaderDashboard /> */}
 
           <div style={{ flex: 1, marginTop: 20 }}>
             <Outlet />
@@ -42,6 +42,6 @@ export const HomeTemplate = () => {
       </div>
     );
   } else {
-    return <Login />;
+    return <LoginPage />;
   }
 };

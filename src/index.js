@@ -13,7 +13,7 @@ import Innote from "./Pages/In Notes/In notes";
 import Outnote from "./Pages/Out Notes/Out notes";
 import Analytics from "./Pages/Analytics/Analytics";
 import CompanyInfo from "./Pages/Company Info/Company Info";
-import { Login } from "./Pages/Login/Login";
+import { Login } from "./Components/Login/Login";
 import { createRoot } from "react-dom/client";
 import { createBrowserHistory } from "history";
 import { store } from "./redux/configStore";

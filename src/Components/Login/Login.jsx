@@ -3,9 +3,11 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { loginApi } from "../../redux/reducers/userReducer";
 import { useDispatch } from "react-redux";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import "../../Components/Login/Login.scss";
+import Box from "@mui/material/Box";
 
-import { removeStore } from "../../util/config";
-import { history } from "../../index";
 export const Login = () => {
   const dispatch = useDispatch();
 
@@ -41,36 +43,39 @@ export const Login = () => {
         <h3 className="login">Login</h3>
 
         <div className="form-group emailLogin">
-          <p>Username</p>
-          <input
-            placeholder="Username"
-            className="form-control"
-            name="username"
-            onChange={form.handleChange}
-            onBlur={form.handleBlur}
-          />
-          {form.errors.username && (
-            <p className="text-danger">{form.errors.username}</p>
-          )}
+          <Box id="userinput">
+            <TextField
+              type="text"
+              label="Username"
+              className="form-control"
+              name="username"
+              onChange={form.handleChange}
+              onBlur={form.handleBlur}
+            />
+            {form.errors.username && (
+              <p className="text-danger">{form.errors.username}</p>
+            )}
+          </Box>
         </div>
         <div className="form-group passwordLogin">
-          <p>Password</p>
-          <input
-            type="password"
-            placeholder="password"
-            className="form-control"
-            name="password"
-            onChange={form.handleChange}
-            onBlur={form.handleBlur}
-          />
-          {form.errors.password && (
-            <p className="text-danger">{form.errors.password}</p>
-          )}
+          <Box id="passwordinput">
+            <TextField
+              type="password"
+              label="Password"
+              className="form-control"
+              name="password"
+              onChange={form.handleChange}
+              onBlur={form.handleBlur}
+            />
+            {form.errors.password && (
+              <p className="text-danger">{form.errors.password}</p>
+            )}
+          </Box>
         </div>
         <div className="form-group submitLogin">
-          <button className="btn btn-success mt-2 btnLogin" type="submit">
+          <Button variant="contained" size="large" type="submit">
             LOGIN
-          </button>
+          </Button>
         </div>
       </form>
       <button className="btn btn-success mt-2 btnLogin" onClick={remove}>
