@@ -4,6 +4,7 @@ import axios from "axios";
 
 const CustomPieChart = () => {
   const [chartData, setChartData] = useState([]);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -41,11 +42,12 @@ const CustomPieChart = () => {
         calloutLabel: {
           enabled: false,
         },
-        sectorLabel: {
+        label: {
           color: "black",
+          fontFamily: "Poppins, sans-serif",
           fontWeight: "bold",
-          formatter: ({ datum, sectorLabelKey }) => {
-            const value = datum[sectorLabelKey];
+          formatter: ({ datum, angleKey }) => {
+            const value = datum[angleKey];
             return numFormatter.format(value);
           },
         },

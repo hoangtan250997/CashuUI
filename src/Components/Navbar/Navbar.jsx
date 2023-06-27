@@ -11,21 +11,13 @@ import {
 } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import logo from "../../cashu.png";
-import cashew from "../../cashew3.png";
 
 import "../../CSS/scss/styles.scss";
 import "../../CSS/scss/styles.css";
 function Navbar() {
   const remove = () => {
-    // const rmAsync = removeStore("userLogin");
-    // dispatch(rmAsync);
     localStorage.removeItem("userLogin");
     window.location.reload();
-  };
-  const [collapsed, setCollapsed] = useState(false);
-
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
   };
 
   return (
@@ -58,7 +50,6 @@ function Navbar() {
           marginTop: "100",
         }}
         mode="inline"
-        inlineCollapsed={collapsed}
       >
         <Menu.Item className="menuItem" key="1">
           <div className="content">
@@ -117,14 +108,6 @@ function Navbar() {
           </NavLink>
         </Menu.Item>
       </Menu>
-      {/* <div id="gif" className="logo-container">
-        <img
-          src={cashew}
-          alt=""
-          className="logo-image"
-          style={{ padding: "0" }}
-        />
-      </div> */}
     </div>
   );
 }

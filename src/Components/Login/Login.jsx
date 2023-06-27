@@ -11,19 +11,24 @@ import Box from "@mui/material/Box";
 export const Login = () => {
   const dispatch = useDispatch();
 
-  const remove = () => {
-    localStorage.removeItem("userLogin");
-    window.location.reload();
-  };
   const form = useFormik({
     initialValues: {
       username: "",
       password: "",
     },
+    // validationSchema: yup.object().shape({
+    //   username: yup.string().required("Username cannot be blank!"),
+    //   password: yup.string().required("Password cannot be blank!"),
+    // }),
     validationSchema: yup.object().shape({
       username: yup.string().required("Username cannot be blank!"),
-      password: yup.string().required("Password cannot be blank!"),
+      password: yup.string().when("username", {
+        is: (username) => username && username.length > 0,
+        then: yup.string().required("Password cannot be blank!"),
+        otherwise: yup.string(),
+      }),
     }),
+
     onSubmit: (values) => {
       const actionAsync = loginApi(values);
       dispatch(actionAsync);

@@ -29,9 +29,9 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { format } from "date-fns";
 import dayjs from "dayjs";
 
-const today = dayjs();
-
 function InNoteForm() {
+  const today = dayjs();
+
   const [supplierData, setsupplierData] = useState([]);
   const [productionData, setproductionData] = useState([]);
   const [areaData, setareaData] = useState([]);
@@ -75,13 +75,13 @@ function InNoteForm() {
 
   const [goodsreceivednotes, setgoodsreceivednotes] = useState({
     supplierCode: "",
-    imcomingDate: "",
+    incomingDate: new Date().toLocaleDateString(),
     record: "",
   });
 
   const [goodsreceivednotesDTO, setgoodsreceivednotesDTO] = useState({
     supplierCode: "",
-    imcomingDate: "",
+    incomingDate: new Date().toLocaleDateString(),
     record: "",
   });
 
@@ -121,16 +121,17 @@ function InNoteForm() {
   };
 
   const handleDateChange = (date) => {
-    console.log("formattedDate ", date);
+    console.log("date ", date);
+    goodsreceivednotesDTO.incomingDate = dayjs(date).format(
+      "YYYY-MM-DD HH:mm:ss"
+    );
+
     setgoodsreceivednotes((prevState) => ({
       ...prevState,
-      imcomingDate: new Date(date).toLocaleDateString(),
+      incomingDate: new Date(date).toLocaleDateString(),
     }));
 
-    setgoodsreceivednotesDTO((prevState) => ({
-      ...prevState,
-      imcomingDate: date.toISOString(),
-    }));
+    console.log("formattedDate ", goodsreceivednotesDTO.incomingDate);
   };
 
   const handleChangeInput = (id, event) => {
@@ -177,8 +178,6 @@ function InNoteForm() {
 
     setgoodsreceivednotesDTO(mergeupdatedGoodsReceivedNotesDTO);
 
-    console.log("goodsreceivednotes", goodsreceivednotes);
-    console.log("goodsreceivednotesDTO", goodsreceivednotesDTO);
     const resultMap = incomingDetailsCreateDTOList.map((item) => {
       if (item.productCode !== "") {
         const filteredProductionData = productionData.filter(
@@ -208,8 +207,7 @@ function InNoteForm() {
     goodsreceivednotesDTO.incomingDetailsCreateDTOList = resultMap2;
     setgoodsreceivednotesDTO(goodsreceivednotesDTO);
 
-    console.log("goodsreceivednotes", goodsreceivednotes);
-    console.log("goodsreceivednotesDTO", goodsreceivednotesDTO);
+    console.log("CHECK ", goodsreceivednotesDTO);
     axios
       .post("http://localhost:8080/goodsreceivednotes", goodsreceivednotesDTO)
       .then(function (response) {
@@ -219,8 +217,8 @@ function InNoteForm() {
         history.push("/innote");
       })
       .catch(function (error) {
-        console.log("Lỗi");
         console.log(error);
+        alert("Amount & Cost must be greater than 0");
       });
   };
 
@@ -302,10 +300,11 @@ function InNoteForm() {
                     </InputLabel>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DatePicker
+                        required
                         disableFuture
                         defaultValue={today}
-                        className="imcomingDate"
-                        // value={goodsreceivednotes.imcomingDate}
+                        className="incomingDate"
+                        // value={goodsreceivednotes.incomingDate}
                         onChange={handleDateChange}
                       />
                     </LocalizationProvider>

@@ -18,17 +18,14 @@ import "../Forms/OutNoteForm.scss";
 import { history } from "../../index";
 
 function OutNoteForm() {
-  //Customer + Production + Area
   const [customerData, setcustomerData] = useState([]);
   const [productionData, setproductionData] = useState([]);
 
-  //GET DATA FROM DB
   useEffect(() => {
     fetchData();
   }, []);
   const fetchData = async () => {
     try {
-      // Get customers list
       const response = await axios.get("http://localhost:8080/customers");
       const sortedcustomerData = response.data.sort((a, b) =>
         a.name.localeCompare(b.name)
@@ -38,7 +35,6 @@ function OutNoteForm() {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-    // Get product list
 
     try {
       const response = await axios.get("http://localhost:8080/products");
@@ -51,31 +47,22 @@ function OutNoteForm() {
       console.error("Error fetching data:", error);
     }
   };
-  //CREATE OBJECTS
 
-  // Khởi tạo giá trị cho form
-  //1
-  //Objects display for forms
   const [goodsreceivednotes, setgoodsreceivednotes] = useState({
     customerCode: "",
     record: "",
   });
-  //Objects display for forms
 
   const [goodsreceivednotesDTO, setgoodsreceivednotesDTO] = useState({
     customerCode: "",
     record: "",
   });
 
-  //2
-  //+-
   const [outgoingDetailsCreateDTOList, setoutgoingDetailsCreateDTOList] =
     useState([
       { id: uuidv4(), productId: "", amount: "", price: "", discount: "" },
     ]);
 
-  //1
-  //Set giá trị cho form
   const handleChange = (event) => {
     console.log("here1");
 
@@ -91,7 +78,7 @@ function OutNoteForm() {
 
       setgoodsreceivednotesDTO((prevState) => ({
         ...prevState,
-        customerCode: filteredData[0].code, // Replace with the desired value for imcomingDate
+        customerCode: filteredData[0].code,
       }));
     } else {
       setgoodsreceivednotes((prevFormData) => ({
@@ -106,8 +93,6 @@ function OutNoteForm() {
     }
   };
 
-  //2
-  //+-
   const handleChangeInput = (id, event) => {
     const newoutgoingDetailsCreateDTOList = outgoingDetailsCreateDTOList.map(
       (i) => {
@@ -118,10 +103,7 @@ function OutNoteForm() {
         return i;
       }
     );
-    console.log(
-      "newoutgoingDetailsCreateDTOList ",
-      newoutgoingDetailsCreateDTOList
-    );
+
     const updatedGoodsReceivedNotes = {
       ...goodsreceivednotes,
       outgoingDetailsCreateDTOList: outgoingDetailsCreateDTOList,
@@ -139,14 +121,12 @@ function OutNoteForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    //merge
     const mergeupdatedGoodsReceivedNotes = {
       ...goodsreceivednotes,
       outgoingDetailsCreateDTOList: outgoingDetailsCreateDTOList,
     };
 
     setgoodsreceivednotes(mergeupdatedGoodsReceivedNotes);
-    // const outgoingDetailsCreateDTOList1 =(...outgoingDetailsCreateDTOList);
     const mergeupdatedGoodsReceivedNotesDTO = {
       ...goodsreceivednotesDTO,
       outgoingDetailsCreateDTOList: [...outgoingDetailsCreateDTOList],
@@ -154,15 +134,11 @@ function OutNoteForm() {
 
     setgoodsreceivednotesDTO(mergeupdatedGoodsReceivedNotesDTO);
 
-    console.log("goodsreceivednotes", goodsreceivednotes);
-    console.log("goodsreceivednotesDTO", goodsreceivednotesDTO);
-    //Convert
     const resultMap = outgoingDetailsCreateDTOList.map((item) => {
       if (item.productId !== "") {
         const filteredProductionData = productionData.filter(
           (item1) => item1.name === item.productId
         );
-        console.log("filteredProductionData", filteredProductionData);
         return {
           ...item,
           productId: filteredProductionData[0].id,
@@ -173,8 +149,6 @@ function OutNoteForm() {
     goodsreceivednotesDTO.outgoingDetailsCreateDTOList = resultMap;
     setgoodsreceivednotesDTO(goodsreceivednotesDTO);
 
-    console.log("goodsreceivednotes", goodsreceivednotes);
-    console.log("goodsreceivednotesDTO", goodsreceivednotesDTO);
     axios
       .post("http://localhost:8080/goodsdeliverynotes", goodsreceivednotesDTO)
       .then(function (response) {
@@ -183,6 +157,7 @@ function OutNoteForm() {
       })
       .catch(function (error) {
         alert(error);
+        alert("Amount & Price & Discount must be greater than 0");
       });
   };
 

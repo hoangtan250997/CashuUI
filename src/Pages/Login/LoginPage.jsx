@@ -1,6 +1,5 @@
 import React from "react";
 import Grid from "@mui/material/Unstable_Grid2";
-import InTable from "../../Components/InNoteTable/InTable";
 import { Login } from "../../Components/Login/Login";
 import "../../Pages/Login/LoginPage.scss";
 

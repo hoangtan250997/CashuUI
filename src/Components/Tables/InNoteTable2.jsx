@@ -68,10 +68,10 @@ export default function InNoteTable2(props) {
             </TableCell>
 
             <TableCell align="left" colSpan={1} style={{ fontWeight: "600" }}>
-              Date: {goodsreceivednotes.imcomingDate}
+              Date: {goodsreceivednotes.incomingDate}
             </TableCell>
             <TableCell align="left" colSpan={2} style={{ fontWeight: "600" }}>
-              Staff: {userLogin.username}
+              Staff: {userLogin.employeeName}
             </TableCell>
           </TableRow>
           <TableRow>

@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-// chartDataReducer.js
 const initialState = [];
 
 const chartDataReducer = (state = initialState, action) => {
