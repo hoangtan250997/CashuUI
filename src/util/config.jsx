@@ -1,7 +1,7 @@
 import axios from "axios";
 import { history } from "../index";
 import { isExpired, decodeToken } from "react-jwt";
-import { request } from "../Thuy/axios";
+// import { request } from "../Thuy/axios";
 
 export const ACCESS_TOKEN = "accessToken";
 export const USER_LOGIN = "userLogin";
