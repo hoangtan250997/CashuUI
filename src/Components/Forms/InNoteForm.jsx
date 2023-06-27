@@ -18,9 +18,8 @@ import { v4 as uuidv4 } from "uuid";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InNoteTable2 from "../Tables/InNoteTable2";
 import { history } from "../../index";
-// import "../../CSS/scss/innotes.css";
-// import "../../CSS/scss/styles.scss";
-// import "../../Components/Forms/InNoteForm.scss";
+import "../../CSS/scss/styles.scss";
+import "../../Components/Forms/InNoteForm.scss";
 import { auto } from "@popperjs/core";
 import axios from "axios";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -33,18 +32,15 @@ import dayjs from "dayjs";
 const today = dayjs();
 
 function InNoteForm() {
-  //Supplier + Production + Area
   const [supplierData, setsupplierData] = useState([]);
   const [productionData, setproductionData] = useState([]);
   const [areaData, setareaData] = useState([]);
 
-  //GET DATA FROM DB
   useEffect(() => {
     fetchData();
   }, []);
   const fetchData = async () => {
     try {
-      // Get suppliers list
       const response = await axios.get("http://localhost:8080/suppliers");
       const sortedSupplierData = response.data.sort((a, b) =>
         a.name.localeCompare(b.name)
@@ -53,7 +49,6 @@ function InNoteForm() {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-    // Get product list
 
     try {
       const response = await axios.get("http://localhost:8080/products");
@@ -65,7 +60,6 @@ function InNoteForm() {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-    // Get area list
 
     try {
       const response = await axios.get("http://localhost:8080/warehouseareas");
@@ -79,17 +73,11 @@ function InNoteForm() {
     }
   };
 
-  //CREATE OBJECTS
-
-  // Khởi tạo giá trị cho form
-  //1
-  //Objects display for forms
   const [goodsreceivednotes, setgoodsreceivednotes] = useState({
     supplierCode: "",
     imcomingDate: "",
     record: "",
   });
-  //Objects display for forms
 
   const [goodsreceivednotesDTO, setgoodsreceivednotesDTO] = useState({
     supplierCode: "",
@@ -97,15 +85,11 @@ function InNoteForm() {
     record: "",
   });
 
-  //2
-  //+-
   const [incomingDetailsCreateDTOList, setincomingDetailsCreateDTOList] =
     useState([
       { id: uuidv4(), productCode: "", amount: "", cost: "", areaId: "" },
     ]);
 
-  //1
-  //Set giá trị cho form
   const handleChange = (event) => {
     console.log("here1");
 
@@ -121,7 +105,7 @@ function InNoteForm() {
 
       setgoodsreceivednotesDTO((prevState) => ({
         ...prevState,
-        supplierCode: filteredData[0].code, // Replace with the desired value for imcomingDate
+        supplierCode: filteredData[0].code,
       }));
     } else {
       setgoodsreceivednotes((prevFormData) => ({
@@ -136,22 +120,19 @@ function InNoteForm() {
     }
   };
 
-  // Giá trị của date
   const handleDateChange = (date) => {
-    // const formattedDate = format(date, "yyyy-MM-dd HH:mm:ss");
     console.log("formattedDate ", date);
     setgoodsreceivednotes((prevState) => ({
       ...prevState,
-      imcomingDate: new Date(date).toLocaleDateString(), // Replace with the desired value for imcomingDate
+      imcomingDate: new Date(date).toLocaleDateString(),
     }));
 
     setgoodsreceivednotesDTO((prevState) => ({
       ...prevState,
-      imcomingDate: date.toISOString(), // Replace with the desired value for imcomingDate
+      imcomingDate: date.toISOString(),
     }));
   };
-  //2
-  //+-
+
   const handleChangeInput = (id, event) => {
     const newincomingDetailsCreateDTOList = incomingDetailsCreateDTOList.map(
       (i) => {
@@ -183,7 +164,6 @@ function InNoteForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    //merge
     const mergeupdatedGoodsReceivedNotes = {
       ...goodsreceivednotes,
       incomingDetailsCreateDTOList: incomingDetailsCreateDTOList,
@@ -199,7 +179,6 @@ function InNoteForm() {
 
     console.log("goodsreceivednotes", goodsreceivednotes);
     console.log("goodsreceivednotesDTO", goodsreceivednotesDTO);
-    //Convert
     const resultMap = incomingDetailsCreateDTOList.map((item) => {
       if (item.productCode !== "") {
         const filteredProductionData = productionData.filter(
@@ -225,17 +204,9 @@ function InNoteForm() {
       }
     });
     console.log("resultMap2", resultMap2);
-    // set convert to DTO object
 
-    // const updatedGoodsReceivedNotesDTO = {
-    //   ...goodsreceivednotesDTO,
-    //   incomingDetailsCreateDTOList: resultMap2,
-    // };
-    // setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
     goodsreceivednotesDTO.incomingDetailsCreateDTOList = resultMap2;
     setgoodsreceivednotesDTO(goodsreceivednotesDTO);
-
-    // console.log("updatedGoodsReceivedNotesDTO ", updatedGoodsReceivedNotesDTO);
 
     console.log("goodsreceivednotes", goodsreceivednotes);
     console.log("goodsreceivednotesDTO", goodsreceivednotesDTO);
@@ -253,22 +224,8 @@ function InNoteForm() {
       });
   };
 
-  //2
-  //Option của thẻ Product code & Area
-
   const [productCode, setproductCode] = React.useState("");
   const [area, setArea] = React.useState("");
-
-  // const changeProductCode = (event) => {
-  //   console.log("Here");
-  //   setproductCode(event.target.value);
-  // };
-
-  // const changeArea = (event) => {
-  //   setArea(event.target.value);
-  // };
-
-  // Dấu +
 
   const handleAddFields = () => {
     setincomingDetailsCreateDTOList([
@@ -281,7 +238,6 @@ function InNoteForm() {
     };
     console.log("size InNoteForm: ", incomingDetailsCreateDTOList.length);
   };
-  // Dấu -
 
   const handleRemoveFields = (id) => {
     const values = [...incomingDetailsCreateDTOList];
@@ -303,8 +259,6 @@ function InNoteForm() {
         <Container className="inNoteForm" style={{ height: "auto" }}>
           <Typography className="title">IN NOTE FORM</Typography>
           <form onSubmit={handleSubmit}>
-            {/* Nút Supplier Code */}
-
             <Box
               sx={{
                 display: "grid",
@@ -316,14 +270,14 @@ function InNoteForm() {
               <Grid container style={{ width: "100%" }}>
                 <Grid xs={8}>
                   <InputLabel id="supplier-select-label" className="inputLable">
-                    Supplier Code
+                    Supplier Name
                   </InputLabel>
                   <Select
                     fullWidth
                     id="fullWidth"
                     labelId="supplier-select-label"
                     name="supplierCode"
-                    label="Supplier Code"
+                    label="Supplier Name"
                     required={true}
                     value={goodsreceivednotes.supplierCode}
                     onChange={handleChange}
@@ -351,13 +305,13 @@ function InNoteForm() {
                         disableFuture
                         defaultValue={today}
                         className="imcomingDate"
+                        // value={goodsreceivednotes.imcomingDate}
                         onChange={handleDateChange}
                       />
                     </LocalizationProvider>
                   </div>
                 </Grid>
               </Grid>
-              {/* Nút Note */}
               <InputLabel id="note-select-label" className="inputLable">
                 Note (Optional)
               </InputLabel>
@@ -368,26 +322,21 @@ function InNoteForm() {
                 variant="outlined"
                 multiline
                 value={goodsreceivednotes.record}
-                // onChange={(event) => handleChangeInput(inputFields[0].id, event)}
                 onChange={handleChange}
               />
             </Box>
 
             <br />
-            {/* ----------------------------------------------------------------- */}
-            {/* ----------------------------------------------------------------- */}
 
             <Box
               sx={{
                 display: "grid",
                 gridTemplateRows: "repeat(2, 1fr)",
                 rowGap: 1,
-                // columnGap: 3,
               }}
             >
               {incomingDetailsCreateDTOList.map((incomingDetailsCreateDTO) => (
                 <div key={incomingDetailsCreateDTO.id}>
-                  {/* Production Code */}
                   <FormControl
                     className="incomingDetailsCreateDTOList"
                     id="productCodeForm"
@@ -421,55 +370,75 @@ function InNoteForm() {
                       ))}
                     </Select>
                   </FormControl>
-                  {/* Amount  */}
-                  <TextField
-                    required
+                  <FormControl
                     className="incomingDetailsCreateDTOList"
-                    id="amount"
-                    name="amount"
-                    label="Amount (kg)"
-                    value={incomingDetailsCreateDTO.amount}
-                    multiline
+                    id="amountCodeForm"
+                  >
+                    <TextField
+                      required
+                      id="amount"
+                      name="amount"
+                      placeholder="Amount(kg)"
+                      type="number"
+                      value={incomingDetailsCreateDTO.amount}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      onChange={(event) =>
+                        handleChangeInput(incomingDetailsCreateDTO.id, event)
+                      }
+                    />
+                  </FormControl>
+
+                  <TextField
+                    className="incomingDetailsCreateDTOList"
+                    required
+                    id="cost"
+                    placeholder="Cost ($)"
+                    type="number"
+                    name="cost"
+                    value={incomingDetailsCreateDTO.cost}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                     onChange={(event) =>
                       handleChangeInput(incomingDetailsCreateDTO.id, event)
                     }
                   />
-                  {/* Cost */}
-                  <TextField
-                    required
-                    className="incomingDetailsCreateDTOList"
-                    name="cost"
-                    id="cost"
-                    label="Cost ($)"
-                    value={incomingDetailsCreateDTO.cost}
-                    multiline
-                    onChange={(event) =>
-                      handleChangeInput(incomingDetailsCreateDTO.id, event)
-                    }
-                  ></TextField>
-                  {/* Area */}
+
                   <FormControl
                     className="incomingDetailsCreateDTOList"
                     id="areaFormControl"
                   >
-                    <InputLabel>Area</InputLabel>
                     <Select
+                      displayEmpty
+                      variant="outlined"
                       required
-                      labelId="areaId"
                       name="areaId"
                       id="areaId"
                       value={incomingDetailsCreateDTO.area}
-                      label="Area Code"
                       onChange={(event) =>
                         handleChangeInput(incomingDetailsCreateDTO.id, event)
                       }
+                      renderValue={(selected) => {
+                        if (selected === undefined) {
+                          return (
+                            <span
+                              style={{ color: "#a89f9f", fontSize: "1rem" }}
+                            >
+                              Area Code
+                            </span>
+                          );
+                        }
+
+                        return selected;
+                      }}
                     >
                       {areaData.map((item) => (
                         <MenuItem value={item.name}>{item.name}</MenuItem>
                       ))}
                     </Select>
                   </FormControl>
-                  {/* Button */}
                   <IconButton
                     disabled={incomingDetailsCreateDTOList.length === 1}
                     onClick={() =>
@@ -485,8 +454,6 @@ function InNoteForm() {
               ))}
             </Box>
 
-            {/* ----------------------------------------------------------------- */}
-            {/* ----------------------------------------------------------------- */}
             <div
               style={{
                 textAlign: "center",
@@ -503,7 +470,6 @@ function InNoteForm() {
                 variant="contained"
                 color="primary"
                 type="submit"
-                // onClick={handleSubmit}
               >
                 Create Receipt
               </Button>

@@ -170,18 +170,6 @@ function OutNoteForm() {
       }
     });
 
-    console.log("resultMap", resultMap);
-    // set convert to DTO object
-
-    // const updatedGoodsReceivedNotesDTO = {
-    //   ...goodsreceivednotesDTO,
-    //   outgoingDetailsCreateDTOList: resultMap,
-    // };
-    // setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
-    // setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
-
-    // setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
-
     goodsreceivednotesDTO.outgoingDetailsCreateDTOList = resultMap;
     setgoodsreceivednotesDTO(goodsreceivednotesDTO);
 
@@ -190,24 +178,16 @@ function OutNoteForm() {
     axios
       .post("http://localhost:8080/goodsdeliverynotes", goodsreceivednotesDTO)
       .then(function (response) {
-        console.log(response);
-
         alert("Create sucessfull!!!");
         history.push("/outnote");
       })
       .catch(function (error) {
-        console.log("Lỗi");
-        console.log(error);
+        alert(error);
       });
   };
 
-  //2
-  //Option của thẻ Product code & Area
-
   const [productId, setproductId] = React.useState("");
   const [area, setArea] = React.useState("");
-
-  // Dấu +
 
   const handleAddFields = () => {
     setoutgoingDetailsCreateDTOList([
@@ -220,7 +200,6 @@ function OutNoteForm() {
     };
     console.log("size InNoteForm: ", outgoingDetailsCreateDTOList.length);
   };
-  // Dấu -
 
   const handleRemoveFields = (id) => {
     const values = [...outgoingDetailsCreateDTOList];
@@ -242,8 +221,6 @@ function OutNoteForm() {
         <Container className="inNoteForm" style={{ height: "auto" }}>
           <Typography className="title">OUT NOTE FORM</Typography>
           <form onSubmit={handleSubmit}>
-            {/* Nút customer Code */}
-
             <Box
               sx={{
                 display: "grid",
@@ -252,8 +229,6 @@ function OutNoteForm() {
                 marginBottom: 1,
               }}
             >
-              {/* <Grid container style={{ width: "100%" }}> */}
-              {/* <Grid xs={8}> */}
               <InputLabel id="customer-select-label" className="inputLable">
                 Customer Name{" "}
               </InputLabel>
@@ -272,7 +247,6 @@ function OutNoteForm() {
                 ))}
               </Select>
 
-              {/* Nút Note */}
               <InputLabel id="note-select-label" className="inputLable">
                 Note (Optional)
               </InputLabel>
@@ -283,26 +257,21 @@ function OutNoteForm() {
                 variant="outlined"
                 multiline
                 value={goodsreceivednotes.record}
-                // onChange={(event) => handleChangeInput(inputFields[0].id, event)}
                 onChange={handleChange}
               />
             </Box>
 
             <br />
-            {/* ----------------------------------------------------------------- */}
-            {/* ----------------------------------------------------------------- */}
 
             <Box
               sx={{
                 display: "grid",
                 gridTemplateRows: "repeat(2, 1fr)",
                 rowGap: 1,
-                // columnGap: 3,
               }}
             >
               {outgoingDetailsCreateDTOList.map((incomingDetailsCreateDTO) => (
                 <div key={incomingDetailsCreateDTO.id}>
-                  {/* Production Code */}
                   <FormControl
                     className="outgoingDetailsCreateDTOList"
                     id="productIdForm"
@@ -336,7 +305,7 @@ function OutNoteForm() {
                       ))}
                     </Select>
                   </FormControl>
-                  {/* Amount  */}
+
                   <FormControl
                     className="outgoingDetailsCreateDTOList"
                     id="amountCodeForm"
@@ -344,8 +313,6 @@ function OutNoteForm() {
                     <TextField
                       required
                       id="amount"
-                      // id="standard-number"
-                      // label="Amount (kg)"
                       placeholder="Amount(kg)"
                       type="number"
                       name="amount"
@@ -353,21 +320,16 @@ function OutNoteForm() {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      // variant="standard"
                       onChange={(event) =>
                         handleChangeInput(incomingDetailsCreateDTO.id, event)
                       }
                     />
                   </FormControl>
 
-                  {/* price */}
-
                   <TextField
                     className="outgoingDetailsCreateDTOList"
                     required
                     id="price"
-                    // id="standard-number"
-                    // label="Price ($)"
                     placeholder="Price ($)"
                     type="number"
                     name="price"
@@ -375,18 +337,14 @@ function OutNoteForm() {
                     InputLabelProps={{
                       shrink: true,
                     }}
-                    // variant="standard"
                     onChange={(event) =>
                       handleChangeInput(incomingDetailsCreateDTO.id, event)
                     }
                   />
-                  {/* Discount */}
                   <TextField
                     className="outgoingDetailsCreateDTOList"
                     required
                     id="discount"
-                    // id="standard-number"
-                    // label="Discount"
                     placeholder="Discount"
                     type="number"
                     name="discount"
@@ -394,7 +352,6 @@ function OutNoteForm() {
                     InputLabelProps={{
                       shrink: true,
                     }}
-                    // variant="standard"
                     onChange={(event) =>
                       handleChangeInput(incomingDetailsCreateDTO.id, event)
                     }

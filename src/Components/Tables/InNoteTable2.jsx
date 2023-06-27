@@ -13,18 +13,7 @@ import "../Tables/InNoteTable2.scss";
 
 export default function InNoteTable2(props) {
   const { userLogin } = useSelector((state) => state.userReducer);
-  if (userLogin === null) {
-    // Xử lý khi user là null
-    console.log("User không tồn tại.");
-  } else {
-    // Xử lý khi user không phải là null
-    console.log("User tồn tại.", userLogin);
-  }
-  const dispatch = useDispatch();
 
-  const currentDate = new Date().toLocaleDateString();
-
-  const TAX_RATE = 0.07;
   const { goodsreceivednotes } = props;
 
   console.log("Tables", goodsreceivednotes);
@@ -75,7 +64,7 @@ export default function InNoteTable2(props) {
           </TableRow>
           <TableRow>
             <TableCell align="left" colSpan={1} style={{ fontWeight: "600" }}>
-              Supplier Code: {goodsreceivednotes.supplierCode}
+              Supplier Name: {goodsreceivednotes.supplierCode}
             </TableCell>
 
             <TableCell align="left" colSpan={1} style={{ fontWeight: "600" }}>
