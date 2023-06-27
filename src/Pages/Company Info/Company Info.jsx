@@ -1,34 +1,96 @@
 import React, { useState, useEffect } from "react";
 import { fetchChartData } from "../../Services/Data";
 import { useDispatch, useSelector } from "react-redux";
-import CompanyInfo1 from "../../Services/Data";
-import axios from "axios";
+import { Row, Col } from "antd";
+import slides from "../../Components/Carousel/CarouselData.json";
+import { Carousel } from "../../Components/Carousel/Carousel";
 
 export default function CompanyInfo() {
-  const [chartData, setChartData] = useState([]);
-  useEffect(() => {
-    fetchData();
-  }, []);
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("http://localhost:8080/suppliers");
-      setChartData(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  console.log("a: ", chartData);
-
   return (
-    <div className="container" style={{ backgroundColor: "white" }}>
-      <div>
-        {chartData.map((item, index) => (
-          <p key={index}>{item.name}</p>
-        ))}
-      </div>
+    <div
+      className="container"
+      style={{ background: "#b68149", height: "92vh" }}
+    >
+      <Row span={24} className="rowDashboard">
+        <Col
+          span={8}
+          style={{
+            fontFamily: "Poppins, sans-serif",
+            color: "white",
+            background: "#b68149",
+            padding: "10px",
+          }}
+          className="Contentcol"
+        >
+          <div
+            className="content"
+            style={{ marginTop: "15vh", marginLeft: "10vh" }}
+          >
+            <h1>
+              <b>Cashew</b>
+            </h1>
+            <p style={{ textAlign: "justify" }}>
+              Cashew is native to Brazil and filled with antioxidants. It is a
+              good choice for weight loss, especially when eaten raw, since not
+              all fat from is absorbed when consumed in this form. Rich in
+              protein and fiber like other nuts, it is good for heart health and
+              lowering cholesterol. Cashew is loaded with copper, good for
+              formation of red blood cells and anemia prevention. It also
+              contains lots of magnesium, zinc and iron. Cashew also promotes
+              eye health and due to high levels of selenium and copper, cashew
+              oil is great for skin and hair.
+            </p>
+            <h2>
+              <b>Did you know?</b>
+            </h2>
+            <p>
+              Cashew is actually a seed from cashew tree and it grows outside
+              so-called ‘cashew apple’.
+            </p>
 
-      <p>123</p>
+            <h2>
+              <b>Good for:</b>
+            </h2>
+            <div class="elementor-widget-container">
+              <ul class="elementor-inline-items elementor-icon-list-items elementor-post-info">
+                <li
+                  href="https://vitaminbase.eu/benefits/anemia-prevention/"
+                  class="elementor-post-info__terms-list-item"
+                >
+                  anemia prevention
+                </li>
+                <li
+                  href="https://vitaminbase.eu/benefits/eye-health/"
+                  class="elementor-post-info__terms-list-item"
+                >
+                  eye health
+                </li>
+                <li
+                  href="https://vitaminbase.eu/benefits/hair/"
+                  class="elementor-post-info__terms-list-item"
+                >
+                  hair
+                </li>
+                <li
+                  href="https://vitaminbase.eu/benefits/heart-health/"
+                  class="elementor-post-info__terms-list-item"
+                >
+                  heart health
+                </li>
+                <li
+                  href="https://vitaminbase.eu/benefits/lowering-cholesterol/"
+                  class="elementor-post-info__terms-list-item"
+                >
+                  lowering cholesterol
+                </li>
+              </ul>
+            </div>
+          </div>
+        </Col>
+        <Col span={16} className="Carouselcol">
+          <Carousel data={slides.slides} />
+        </Col>
+      </Row>
     </div>
   );
 }

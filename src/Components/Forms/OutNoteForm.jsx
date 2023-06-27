@@ -15,6 +15,8 @@ import OutNoteTable from "../Tables/OutNoteTable";
 import axios from "axios";
 import Grid from "@mui/material/Unstable_Grid2";
 import "../Forms/OutNoteForm.scss";
+import { history } from "../../index";
+
 function OutNoteForm() {
   //Customer + Production + Area
   const [customerData, setcustomerData] = useState([]);
@@ -171,14 +173,17 @@ function OutNoteForm() {
     console.log("resultMap", resultMap);
     // set convert to DTO object
 
-    const updatedGoodsReceivedNotesDTO = {
-      ...goodsreceivednotesDTO,
-      outgoingDetailsCreateDTOList: resultMap,
-    };
-    setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
-    setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
+    // const updatedGoodsReceivedNotesDTO = {
+    //   ...goodsreceivednotesDTO,
+    //   outgoingDetailsCreateDTOList: resultMap,
+    // };
+    // setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
+    // setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
 
-    setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
+    // setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
+
+    goodsreceivednotesDTO.outgoingDetailsCreateDTOList = resultMap;
+    setgoodsreceivednotesDTO(goodsreceivednotesDTO);
 
     console.log("goodsreceivednotes", goodsreceivednotes);
     console.log("goodsreceivednotesDTO", goodsreceivednotesDTO);
@@ -188,6 +193,7 @@ function OutNoteForm() {
         console.log(response);
 
         alert("Create sucessfull!!!");
+        history.push("/outnote");
       })
       .catch(function (error) {
         console.log("Lỗi");

@@ -227,14 +227,15 @@ function InNoteForm() {
     console.log("resultMap2", resultMap2);
     // set convert to DTO object
 
-    const updatedGoodsReceivedNotesDTO = {
-      ...goodsreceivednotesDTO,
-      incomingDetailsCreateDTOList: resultMap2,
-    };
-    setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
-    setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
+    // const updatedGoodsReceivedNotesDTO = {
+    //   ...goodsreceivednotesDTO,
+    //   incomingDetailsCreateDTOList: resultMap2,
+    // };
+    // setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
+    goodsreceivednotesDTO.incomingDetailsCreateDTOList = resultMap2;
+    setgoodsreceivednotesDTO(goodsreceivednotesDTO);
 
-    setgoodsreceivednotesDTO(updatedGoodsReceivedNotesDTO);
+    // console.log("updatedGoodsReceivedNotesDTO ", updatedGoodsReceivedNotesDTO);
 
     console.log("goodsreceivednotes", goodsreceivednotes);
     console.log("goodsreceivednotesDTO", goodsreceivednotesDTO);
