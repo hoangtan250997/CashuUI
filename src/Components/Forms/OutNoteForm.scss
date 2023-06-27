@@ -51,9 +51,9 @@ legend {
 
 // Đổi màu input
 
-.incomingDetailsCreateDTOList {
+.outgoingDetailsCreateDTOList {
   width: 7rem;
-  margin-right: 0.6rem !important;
+  margin-right: 1rem !important;
   label {
     font-family: "Poppins", sans-serif !important;
     margin: 0;
@@ -61,11 +61,8 @@ legend {
   }
 }
 
-#productCodeForm {
-  width: 15rem;
-  #productCode {
-    font-size: 1rem;
-  }
+#productIdForm {
+  width: 14rem;
 }
 
 #amountCodeForm {

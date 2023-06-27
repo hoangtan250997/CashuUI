@@ -12,8 +12,6 @@ export const Login = () => {
   const dispatch = useDispatch();
 
   const remove = () => {
-    // const rmAsync = removeStore("userLogin");
-    // dispatch(rmAsync);
     localStorage.removeItem("userLogin");
     window.location.reload();
   };
@@ -38,7 +36,7 @@ export const Login = () => {
       <form
         className="formLogin "
         onSubmit={form.handleSubmit}
-        style={{ backgroundColor: "rgb(220, 200, 200)", padding: "20px" }}
+        style={{ backgroundColor: "rgb(220, 200, 200)", padding: "80px" }}
       >
         <h3 className="login">Login</h3>
 
@@ -48,6 +46,7 @@ export const Login = () => {
               type="text"
               label="Username"
               className="form-control"
+              size="medium"
               name="username"
               onChange={form.handleChange}
               onBlur={form.handleBlur}
@@ -78,9 +77,6 @@ export const Login = () => {
           </Button>
         </div>
       </form>
-      <button className="btn btn-success mt-2 btnLogin" onClick={remove}>
-        REMOVE
-      </button>
     </>
   );
 };

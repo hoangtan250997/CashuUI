@@ -49,7 +49,7 @@ export const loginApi = (userLogin) => {
     saveStore(ACCESS_TOKEN, result.data.token);
     //Gọi axios lấy dữ liệu api từ token
     //Gọi api getprofile
-    alert("Dang nhap thanh cong!");
+    alert("Login Successful!");
     history.push("/dashboard");
     // window.location.href = "/dashboard";
 

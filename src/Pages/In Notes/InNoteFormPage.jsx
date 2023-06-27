@@ -15,7 +15,6 @@ export default function InnoteFormPage() {
         height: "100%",
       }}
     >
-      <HeaderHome />
       <div style={{ flex: 1, marginTop: 10 }}>
         <InNoteForm />
       </div>

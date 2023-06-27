@@ -9,16 +9,17 @@ export default function CompanyInfo() {
   return (
     <div
       className="container"
-      style={{ background: "#b68149", height: "92vh" }}
+      style={{ background: "#b68149", borderRadius: "20px" }}
     >
-      <Row span={24} className="rowDashboard">
+      <Row span={24} className="rowDashboard" style={{ height: "88vh" }}>
         <Col
           span={8}
           style={{
             fontFamily: "Poppins, sans-serif",
             color: "white",
-            background: "#b68149",
+            background: "transparent",
             padding: "10px",
+            height: "100%",
           }}
           className="Contentcol"
         >
@@ -87,7 +88,7 @@ export default function CompanyInfo() {
             </div>
           </div>
         </Col>
-        <Col span={16} className="Carouselcol">
+        <Col span={16} className="Carouselcol" style={{ height: "100%" }}>
           <Carousel data={slides.slides} />
         </Col>
       </Row>

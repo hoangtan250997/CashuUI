@@ -307,17 +307,10 @@ function OutNoteForm() {
                     className="outgoingDetailsCreateDTOList"
                     id="productIdForm"
                   >
-                    {/* <InputLabel
-                      id="production-select-lable"
-                      className="inputLable"
-                    >
-                      Production Name{" "}
-                    </InputLabel> */}
                     <Select
                       displayEmpty
                       variant="outlined"
                       required
-                      // labelId="production-select-lable"
                       id="productId"
                       name="productId"
                       value={incomingDetailsCreateDTO.id.productId}

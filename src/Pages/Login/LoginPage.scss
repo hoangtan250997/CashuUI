@@ -1,5 +1,6 @@
 html {
   height: 100vh;
+  // font-size: 1rem !important;
 }
 
 .MuiGrid2-root #logincol {
@@ -7,6 +8,17 @@ html {
   text-align: center;
 }
 .formLogin {
-  margin-top: 25vh;
+  height: auto;
+  margin-top: 30vh;
+  margin-bottom: 30vh;
+
   border-radius: 20px;
 }
+// #logincol {
+//   background-color: red !important;
+// }
+
+// .form-control {
+//   height: 50px !important;
+//   font-size: 1rem !important;
+// }

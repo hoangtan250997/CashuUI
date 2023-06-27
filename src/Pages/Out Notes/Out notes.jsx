@@ -14,7 +14,6 @@ export default function Innote() {
         height: "100%",
       }}
     >
-      <HeaderOutNote />
       <div style={{ flex: 1, marginTop: 10 }}>
         <OutTable />
       </div>

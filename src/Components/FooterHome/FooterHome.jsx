@@ -11,10 +11,11 @@ const FooterHome = () => {
         justifyContent: "center", // Căn giữa theo chiều ngang
         alignItems: "center", // Căn giữa theo chiều dọc
         borderRadius: "20px",
+        fontWeight: "bold",
+        fontStyle: "italic",
         height: "3vh",
         padding: "0",
-        marginTop: "10px",
-        backgroundColor: "rgba(255,225,255,0.5)",
+        backgroundColor: "rgba(255,255,255,0.5)",
       }}
     >
       © 2023 Cashu Company. All rights reserved. Website designed by Tan Nguyen

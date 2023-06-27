@@ -8,37 +8,50 @@
 html {
   font-family: "Poppins", sans-serif !important;
 }
+//Header
+#Hello {
+  height: auto;
+}
+#Hello span {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .navbar {
   height: 99vh !important;
 }
 .logo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .logo-image {
   width: 200px;
   padding-top: 30px;
   padding-bottom: 30px;
+  padding-left: 25px;
 }
-
+#gif {
+  padding-left: 25px;
+}
 .menuItem {
   height: auto !important;
   width: auto !important;
   gap: 30px;
   // border: 1px solid white;
   margin-bottom: 30px !important;
-  margin-left: 20px !important;
-  margin-right: 20px !important;
-  font-size: 17px;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+  font-size: 1rem !important;
 }
 
 .menuItem .content {
   font-family: "Poppins", sans-serif;
   text-align: left;
-  padding: 10px 0px;
+  padding-top: 12px;
+  padding-bottom: 10px;
+
+  padding-left: 14px;
 }
 
 .icon {

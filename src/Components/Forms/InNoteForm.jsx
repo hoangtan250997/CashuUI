@@ -392,22 +392,29 @@ function InNoteForm() {
                     className="incomingDetailsCreateDTOList"
                     id="productCodeForm"
                   >
-                    <InputLabel
-                      style={{ margin: "0" }}
-                      className="incomingDetailsCreateDTOList"
-                    >
-                      Product Name
-                    </InputLabel>
                     <Select
+                      displayEmpty
+                      variant="outlined"
                       required
-                      labelId="productCode"
                       id="productCode"
                       name="productCode"
                       value={incomingDetailsCreateDTO.id.productCode}
-                      label="Product Code"
                       onChange={(event) =>
                         handleChangeInput(incomingDetailsCreateDTO.id, event)
                       }
+                      renderValue={(selected) => {
+                        if (selected === undefined) {
+                          return (
+                            <span
+                              style={{ color: "#a89f9f", fontSize: "1rem" }}
+                            >
+                              Production Name
+                            </span>
+                          );
+                        }
+
+                        return selected;
+                      }}
                     >
                       {productionData.map((item) => (
                         <MenuItem value={item.name}>{item.name}</MenuItem>

@@ -16,6 +16,12 @@ import cashew from "../../cashew3.png";
 import "../../CSS/scss/styles.scss";
 import "../../CSS/scss/styles.css";
 function Navbar() {
+  const remove = () => {
+    // const rmAsync = removeStore("userLogin");
+    // dispatch(rmAsync);
+    localStorage.removeItem("userLogin");
+    window.location.reload();
+  };
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleCollapsed = () => {
@@ -32,13 +38,6 @@ function Navbar() {
         textAlign: "left",
       }}
     >
-      {/* <Button
-        type="primary"
-        onClick={toggleCollapsed}
-        style={{ marginBottom: 16 }}
-      >
-        {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-      </Button> */}
       <div id="logo" className="logo-container">
         <img src={logo} alt="" className="logo-image" />
       </div>
@@ -81,7 +80,7 @@ function Navbar() {
           <div className="content">
             <NavLink to="/innote">
               <EditOutlined className="icon" />
-              <span>In Note</span>{" "}
+              <span>Receipt Note </span>{" "}
             </NavLink>
           </div>
         </Menu.Item>
@@ -89,7 +88,7 @@ function Navbar() {
           <div className="content">
             <NavLink to="/outnote">
               <PrinterOutlined className="icon" />
-              <span>Out Note</span>
+              <span>Delivery Note</span>
             </NavLink>
           </div>
         </Menu.Item>
@@ -97,7 +96,7 @@ function Navbar() {
           <div className="content">
             <NavLink to="/companyInfo">
               <SolutionOutlined className="icon" />
-              <span>Company Info</span>
+              <span>Sharing Hub</span>
             </NavLink>
           </div>
         </Menu.Item>
@@ -110,7 +109,7 @@ function Navbar() {
           }}
         />
         <Menu.Item className="menuItem" key="6">
-          <NavLink to="/login">
+          <NavLink onClick={remove}>
             <div className="content">
               <LogoutOutlined className="icon" />
               <span>Log out</span>
@@ -118,14 +117,14 @@ function Navbar() {
           </NavLink>
         </Menu.Item>
       </Menu>
-      <div id="gif" className="logo-container">
+      {/* <div id="gif" className="logo-container">
         <img
           src={cashew}
           alt=""
           className="logo-image"
           style={{ padding: "0" }}
         />
-      </div>
+      </div> */}
     </div>
   );
 }

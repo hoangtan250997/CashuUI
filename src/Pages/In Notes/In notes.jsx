@@ -16,7 +16,6 @@ export default function Innote() {
         height: "100%",
       }}
     >
-      <HeaderHome />
       <div style={{ flex: 1, marginTop: 10 }}>
         <InTable />
       </div>

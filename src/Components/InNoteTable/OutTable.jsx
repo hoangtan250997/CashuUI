@@ -14,6 +14,8 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { makeStyles } from "@mui/styles/";
 import { TablePagination } from "@mui/material";
+import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 // import { GridFilterOperator } from "@mui/x-data-grid";
 
 import axios from "axios";
@@ -119,7 +121,7 @@ export default function InTable() {
         <TableRow>
           <TableCell
             className={classes.cell}
-            style={{ paddingBottom: 5, paddingTop: 0 }}
+            style={{ paddingBottom: 0, paddingTop: 0 }}
             colSpan={6}
           >
             <Collapse in={open} timeout="auto" unmountOnExit>
@@ -269,7 +271,18 @@ export default function InTable() {
       <Table aria-label="collapsible table">
         <TableHead style={{ background: "#6b3e2e" }}>
           <TableRow>
-            <TableCell></TableCell>
+            <TableCell>
+              {" "}
+              <Button
+                variant="contained"
+                component={Link}
+                to="/outnoteform"
+                // color="secondary"
+                style={{ backgroundColor: "#78764f" }}
+              >
+                Create New
+              </Button>
+            </TableCell>
             <TableCell
               style={{ fontWeight: "bold", fontSize: 23, color: "white" }}
               align="center"

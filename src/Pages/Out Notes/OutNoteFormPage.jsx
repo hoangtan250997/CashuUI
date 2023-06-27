@@ -15,7 +15,6 @@ export default function OutnoteFormPage() {
         height: "100%",
       }}
     >
-      <HeaderOutNote />
       <div style={{ flex: 1, marginTop: 10 }}>
         <OutNoteForm />
       </div>
