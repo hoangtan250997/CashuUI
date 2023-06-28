@@ -248,7 +248,7 @@ function InNoteForm() {
         history.push("/innote");
       })
       .catch(function (error) {
-        console.log("Lỗi");
+        alert("Amount & Cost must be greater than 0");
         console.log(error);
       });
   };
