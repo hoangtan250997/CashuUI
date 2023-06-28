@@ -51,7 +51,7 @@ legend {
 // }
 
 .incomingDetailsCreateDTOList {
-  width: 8rem;
+  width: 8rem !important;
   margin-right: 0.6rem !important;
   label {
     font-family: "Poppins", sans-serif !important;
@@ -69,15 +69,12 @@ legend {
 }
 
 #productCodeForm {
-  width: 250px;
-  #productCode {
-    font-size: small;
-  }
+  width: 240px !important;
+  // #productCode {
+  //   font-size: small;
+  // }
 }
 
-#areaId {
-  font-size: small;
-}
 #areaFormControl {
   width: 130px;
 }

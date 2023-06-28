@@ -91,8 +91,6 @@ function InNoteForm() {
     ]);
 
   const handleChange = (event) => {
-    console.log("here1");
-
     const { name, value } = event.target;
 
     if (name === "supplierCode") {
@@ -144,10 +142,7 @@ function InNoteForm() {
         return i;
       }
     );
-    console.log(
-      "newincomingDetailsCreateDTOList ",
-      newincomingDetailsCreateDTOList
-    );
+
     const updatedGoodsReceivedNotes = {
       ...goodsreceivednotes,
       incomingDetailsCreateDTOList: incomingDetailsCreateDTOList,
@@ -207,7 +202,6 @@ function InNoteForm() {
     goodsreceivednotesDTO.incomingDetailsCreateDTOList = resultMap2;
     setgoodsreceivednotesDTO(goodsreceivednotesDTO);
 
-    console.log("CHECK ", goodsreceivednotesDTO);
     axios
       .post("http://localhost:8080/goodsreceivednotes", goodsreceivednotesDTO)
       .then(function (response) {
