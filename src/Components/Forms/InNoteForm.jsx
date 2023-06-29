@@ -31,7 +31,6 @@ import dayjs from "dayjs";
 
 function InNoteForm() {
   const today = dayjs();
-
   const [supplierData, setsupplierData] = useState([]);
   const [productionData, setproductionData] = useState([]);
   const [areaData, setareaData] = useState([]);
@@ -78,7 +77,7 @@ function InNoteForm() {
     incomingDate: new Date().toLocaleDateString(),
     record: "",
   });
-
+  console.log("goodsreceivednotes ", goodsreceivednotes);
   const [goodsreceivednotesDTO, setgoodsreceivednotesDTO] = useState({
     supplierCode: "",
     incomingDate: new Date().toLocaleDateString(),
@@ -382,22 +381,25 @@ function InNoteForm() {
                       }
                     />
                   </FormControl>
-
-                  <TextField
+                  <FormControl
                     className="incomingDetailsCreateDTOList"
-                    required
-                    id="cost"
-                    placeholder="Cost ($)"
-                    type="number"
-                    name="cost"
-                    value={incomingDetailsCreateDTO.cost}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    onChange={(event) =>
-                      handleChangeInput(incomingDetailsCreateDTO.id, event)
-                    }
-                  />
+                    id="costForm"
+                  >
+                    <TextField
+                      required
+                      id="cost"
+                      placeholder="Cost ($)"
+                      type="number"
+                      name="cost"
+                      value={incomingDetailsCreateDTO.cost}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      onChange={(event) =>
+                        handleChangeInput(incomingDetailsCreateDTO.id, event)
+                      }
+                    />
+                  </FormControl>
 
                   <FormControl
                     className="incomingDetailsCreateDTOList"
@@ -419,7 +421,7 @@ function InNoteForm() {
                             <span
                               style={{ color: "#a89f9f", fontSize: "1rem" }}
                             >
-                              Area Code
+                              Area Name
                             </span>
                           );
                         }

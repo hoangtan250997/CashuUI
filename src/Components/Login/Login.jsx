@@ -16,10 +16,7 @@ export const Login = () => {
       username: "",
       password: "",
     },
-    // validationSchema: yup.object().shape({
-    //   username: yup.string().required("Username cannot be blank!"),
-    //   password: yup.string().required("Password cannot be blank!"),
-    // }),
+
     validationSchema: yup.object().shape({
       username: yup.string().required("Username cannot be blank!"),
       password: yup.string().when("username", {
@@ -43,7 +40,7 @@ export const Login = () => {
         onSubmit={form.handleSubmit}
         style={{ backgroundColor: "rgb(220, 200, 200)", padding: "80px" }}
       >
-        <h3 className="login">Login</h3>
+        <h1 className="login">Login</h1>
 
         <div className="form-group emailLogin">
           <Box id="userinput">
@@ -77,7 +74,12 @@ export const Login = () => {
           </Box>
         </div>
         <div className="form-group submitLogin">
-          <Button variant="contained" size="large" type="submit">
+          <Button
+            variant="contained"
+            size="large"
+            type="submit"
+            style={{ backgroundColor: "black" }}
+          >
             LOGIN
           </Button>
         </div>

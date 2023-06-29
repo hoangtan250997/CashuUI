@@ -193,7 +193,7 @@ function OutNoteForm() {
   return (
     <Grid container spacing={0.5} style={{ width: "100%" }}>
       <Grid xs={6}>
-        <Container className="inNoteForm" style={{ height: "auto" }}>
+        <Container className="outNoteForm" style={{ height: "auto" }}>
           <Typography className="title">OUT NOTE FORM</Typography>
           <form onSubmit={handleSubmit}>
             <Box

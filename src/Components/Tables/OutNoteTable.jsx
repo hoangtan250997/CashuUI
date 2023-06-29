@@ -73,7 +73,7 @@ export default function OutNoteTable(props) {
           </TableRow>
           <TableRow>
             <TableCell align="left" colSpan={1} style={{ fontWeight: "600" }}>
-              Customer : {goodsreceivednotes.customerCode}
+              Customer Name: {goodsreceivednotes.customerCode}
             </TableCell>
 
             <TableCell align="left" colSpan={1} style={{ fontWeight: "600" }}>
